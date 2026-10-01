@@ -1,0 +1,1381 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>AI Learning ป.6 | บทเรียน</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700;800&display=swap');
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+  font-family:Anuphan,Arial,sans-serif;
+  color:#173b70;
+}
+
+body{
+  background:
+    #f5f9ff
+    url('https://cdn.phototourl.com/free/2026-09-08-221b082d-d9a2-40ae-99c0-58bf2ae706b6.png')
+    center top / cover fixed no-repeat;
+
+  min-height:100vh;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(247,250,255,.90);
+  z-index:-1;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:30;
+
+  background:#fff;
+
+  border-bottom:1px solid #dce7f5;
+
+  box-shadow:
+    0 2px 14px rgba(35,75,120,.10);
+}
+
+.header{
+  max-width:1180px;
+  margin:auto;
+
+  min-height:66px;
+
+  padding:10px 18px;
+
+  display:flex;
+  align-items:center;
+
+  gap:24px;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:800;
+
+  color:#1769d3;
+
+  white-space:nowrap;
+}
+
+.logo b{
+  color:#e64c91;
+}
+
+nav{
+  display:flex;
+  gap:3px;
+  flex:1;
+
+  overflow:auto;
+}
+
+nav a{
+  padding:9px 10px;
+
+  border-radius:9px;
+
+  text-decoration:none;
+
+  color:#5b708d;
+
+  font-size:13px;
+  font-weight:700;
+
+  white-space:nowrap;
+
+  transition:.2s;
+}
+
+nav a:hover{
+  background:#edf5ff;
+  color:#1769d3;
+}
+
+nav a.active{
+  background:#edf5ff;
+  color:#1769d3;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+main{
+  max-width:1180px;
+  margin:auto;
+
+  padding:
+    30px 18px 120px;
+}
+
+.page{
+  margin-top:5px;
+}
+
+.title{
+  text-align:center;
+
+  margin-bottom:25px;
+}
+
+.title h2{
+  margin:0;
+
+  font-size:
+    clamp(28px,4vw,38px);
+
+  color:#173f80;
+
+  font-weight:800;
+}
+
+.title p{
+  margin:7px 0 0;
+
+  color:#6b7f9b;
+
+  font-size:15px;
+}
+
+
+/* =====================================================
+   LESSON BADGE
+===================================================== */
+
+.lesson-badge{
+  display:inline-flex;
+
+  align-items:center;
+  gap:7px;
+
+  padding:
+    7px 14px;
+
+  margin-bottom:10px;
+
+  border-radius:999px;
+
+  background:#edf5ff;
+
+  color:#1769d3;
+
+  font-size:13px;
+
+  font-weight:800;
+}
+
+
+/* =====================================================
+   21ST STYLE SLIDER CARD
+===================================================== */
+
+.slider-card{
+
+  position:relative;
+
+  width:100%;
+
+  padding:14px;
+
+  border-radius:30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.98),
+      rgba(239,247,255,.95)
+    );
+
+  border:1px solid #d8e7f8;
+
+  box-shadow:
+    0 24px 65px rgba(39,91,150,.16),
+    0 8px 25px rgba(39,91,150,.07);
+
+  overflow:hidden;
+}
+
+.slider-card:before{
+  content:"";
+
+  position:absolute;
+
+  width:250px;
+  height:250px;
+
+  top:-130px;
+  right:-80px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(91,158,240,.18),
+      transparent 70%
+    );
+
+  pointer-events:none;
+}
+
+.slider-card:after{
+  content:"";
+
+  position:absolute;
+
+  width:200px;
+  height:200px;
+
+  bottom:-100px;
+  left:-70px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(230,76,145,.10),
+      transparent 70%
+    );
+
+  pointer-events:none;
+}
+
+
+/* =====================================================
+   SLIDER
+===================================================== */
+
+.slider{
+  position:relative;
+
+  width:100%;
+
+  aspect-ratio:16 / 9;
+
+  border-radius:22px;
+
+  overflow:hidden;
+
+  background:#eef4fb;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(23,105,211,.08);
+
+  touch-action:pan-y;
+
+  user-select:none;
+}
+
+.slide{
+  position:absolute;
+
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  opacity:0;
+
+  transform:scale(1.015);
+
+  transition:
+    opacity .45s ease,
+    transform .45s ease;
+
+  pointer-events:none;
+}
+
+.slide.active{
+  opacity:1;
+
+  transform:scale(1);
+
+  pointer-events:auto;
+}
+
+.slide img{
+  display:block;
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  background:#f8fbff;
+
+  user-select:none;
+
+  -webkit-user-drag:none;
+}
+
+
+/* =====================================================
+   SLIDE NUMBER
+===================================================== */
+
+.slide-number{
+
+  position:absolute;
+
+  top:18px;
+  right:18px;
+
+  z-index:10;
+
+  padding:
+    7px 12px;
+
+  border-radius:999px;
+
+  color:#fff;
+
+  background:
+    rgba(23,59,112,.75);
+
+  backdrop-filter:blur(8px);
+
+  font-size:13px;
+
+  font-weight:800;
+
+  box-shadow:
+    0 5px 15px rgba(0,0,0,.12);
+}
+
+
+/* =====================================================
+   ARROWS
+===================================================== */
+
+.slide-btn{
+
+  position:absolute;
+
+  top:50%;
+
+  z-index:10;
+
+  transform:translateY(-50%);
+
+  width:50px;
+  height:50px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.94);
+
+  color:#1769d3;
+
+  font-size:31px;
+
+  line-height:1;
+
+  cursor:pointer;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:
+    0 8px 25px rgba(35,75,120,.20);
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+.slide-btn:hover{
+
+  transform:
+    translateY(-50%)
+    scale(1.08);
+
+  background:#fff;
+
+  box-shadow:
+    0 12px 30px rgba(23,105,211,.25);
+}
+
+.slide-btn:active{
+
+  transform:
+    translateY(-50%)
+    scale(.95);
+}
+
+.slide-prev{
+  left:20px;
+}
+
+.slide-next{
+  right:20px;
+}
+
+
+/* =====================================================
+   DOTS
+===================================================== */
+
+.dots{
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  gap:8px;
+
+  margin:
+    18px 0 15px;
+}
+
+.dot{
+
+  width:8px;
+  height:8px;
+
+  padding:0;
+
+  border:none;
+
+  border-radius:999px;
+
+  background:#cbd8e8;
+
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+.dot:hover{
+  background:#9fb9d9;
+}
+
+.dot.active{
+
+  width:28px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #1769d3,
+      #7b55d8
+    );
+}
+
+
+/* =====================================================
+   THUMBNAILS
+===================================================== */
+
+.thumbnails{
+
+  display:flex;
+
+  gap:10px;
+
+  overflow-x:auto;
+
+  padding:
+    3px 4px 8px;
+
+  scrollbar-width:thin;
+}
+
+.thumbnail{
+
+  flex:
+    0 0 120px;
+
+  aspect-ratio:16 / 9;
+
+  padding:3px;
+
+  border:
+    2px solid transparent;
+
+  border-radius:12px;
+
+  background:#dce8f5;
+
+  cursor:pointer;
+
+  overflow:hidden;
+
+  transition:
+    .25s ease;
+}
+
+.thumbnail img{
+
+  width:100%;
+  height:100%;
+
+  display:block;
+
+  object-fit:cover;
+
+  border-radius:8px;
+
+  background:#fff;
+}
+
+.thumbnail:hover{
+
+  transform:
+    translateY(-2px);
+}
+
+.thumbnail.active{
+
+  border-color:#1769d3;
+
+  background:#fff;
+
+  box-shadow:
+    0 5px 18px rgba(23,105,211,.22);
+}
+
+
+/* =====================================================
+   SOURCE BUTTON
+===================================================== */
+
+.source-area{
+
+  display:flex;
+
+  justify-content:center;
+
+  margin:
+    24px 0 10px;
+}
+
+.source-btn{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:
+    12px 20px;
+
+  border-radius:999px;
+
+  text-decoration:none;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1769d3,
+      #7657d9
+    );
+
+  font-size:14px;
+
+  font-weight:800;
+
+  border:
+    1px solid rgba(255,255,255,.35);
+
+  box-shadow:
+    0 9px 25px rgba(23,105,211,.22);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.source-btn:hover{
+
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 14px 32px rgba(23,105,211,.30);
+}
+
+.source-icon{
+
+  width:30px;
+  height:30px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.18);
+
+  font-size:15px;
+}
+
+.source-text{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:flex-start;
+
+  line-height:1.2;
+}
+
+.source-title{
+  font-size:14px;
+}
+
+.source-url{
+
+  margin-top:2px;
+
+  font-size:10px;
+
+  font-weight:500;
+
+  opacity:.8;
+}
+
+
+/* =====================================================
+   INFO
+===================================================== */
+
+.info-card{
+
+  margin-top:20px;
+
+  padding:20px 22px;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f9fcff,
+      #edf6ff
+    );
+
+  border:
+    1px solid #dbe8f7;
+
+  box-shadow:
+    0 7px 22px rgba(49,95,150,.07);
+}
+
+.info-card h3{
+
+  margin:
+    0 0 6px;
+
+  color:#294e82;
+
+  font-size:19px;
+}
+
+.info-card p{
+
+  margin:0;
+
+  color:#5d7391;
+
+  line-height:1.8;
+
+  font-size:14px;
+}
+
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
+
+.bottom-nav{
+
+  position:fixed;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  z-index:40;
+
+  background:
+    rgba(255,255,255,.97);
+
+  border-top:
+    1px solid #dbe7f6;
+
+  box-shadow:
+    0 -4px 15px rgba(35,75,120,.10);
+}
+
+.bottom-inner{
+
+  max-width:1180px;
+
+  margin:auto;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:
+    10px 18px;
+
+  gap:12px;
+}
+
+.bottom-btn{
+
+  min-width:120px;
+
+  padding:
+    11px 17px;
+
+  border-radius:11px;
+
+  text-decoration:none;
+
+  font-weight:800;
+
+  text-align:center;
+
+  border:
+    1px solid #cadcf2;
+
+  background:#fff;
+
+  color:#1769d3;
+
+  transition:.2s;
+}
+
+.bottom-btn:hover{
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 5px 15px rgba(23,105,211,.12);
+}
+
+.bottom-btn.next{
+
+  background:#1769d3;
+
+  color:#fff;
+
+  border-color:#1769d3;
+}
+
+.bottom-center{
+
+  font-size:12px;
+
+  color:#7a8ca3;
+
+  font-weight:700;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+  background:#fff;
+
+  border-top:
+    1px solid #dbe7f6;
+
+  text-align:center;
+
+  padding:24px;
+
+  color:#7385a0;
+
+  font-size:13px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:850px){
+
+  .header{
+
+    gap:14px;
+  }
+
+  nav a{
+
+    font-size:12px;
+
+    padding:
+      8px 7px;
+  }
+
+  .slider-card{
+
+    padding:10px;
+
+    border-radius:22px;
+  }
+
+  .slider{
+
+    border-radius:17px;
+  }
+
+  .thumbnail{
+
+    flex-basis:100px;
+  }
+}
+
+
+@media(max-width:600px){
+
+  .header{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+    padding:
+      10px 12px;
+  }
+
+  nav{
+
+    width:100%;
+  }
+
+  main{
+
+    padding:
+      18px 12px 100px;
+  }
+
+  .title h2{
+
+    font-size:27px;
+  }
+
+  .title p{
+
+    font-size:13px;
+  }
+
+  .slider-card{
+
+    padding:7px;
+
+    border-radius:19px;
+  }
+
+  .slider{
+
+    border-radius:14px;
+  }
+
+  .slide-btn{
+
+    width:40px;
+    height:40px;
+
+    font-size:25px;
+  }
+
+  .slide-prev{
+    left:10px;
+  }
+
+  .slide-next{
+    right:10px;
+  }
+
+  .slide-number{
+
+    top:10px;
+    right:10px;
+
+    font-size:11px;
+
+    padding:
+      6px 9px;
+  }
+
+  .thumbnail{
+
+    flex-basis:90px;
+  }
+
+  .source-btn{
+
+    padding:
+      11px 16px;
+  }
+
+  .source-url{
+
+    display:none;
+  }
+
+  .bottom-center{
+
+    display:none;
+  }
+
+  .bottom-btn{
+
+    min-width:105px;
+
+    padding:
+      10px 12px;
+
+    font-size:12px;
+  }
+}
+
+
+/* =====================================================
+   YOUTUBE BUTTONS
+===================================================== */
+.youtube-area{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:18px 0 10px}
+.youtube-btn{display:inline-flex;align-items:center;gap:10px;min-width:220px;justify-content:center;padding:12px 20px;border-radius:999px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#ff4d6d,#e91e63);border:1px solid rgba(255,255,255,.45);box-shadow:0 9px 24px rgba(233,30,99,.20);font-size:14px;font-weight:800;transition:.22s ease}
+.youtube-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 30px rgba(233,30,99,.28)}
+.youtube-btn:active{transform:translateY(0) scale(.98)}
+.youtube-icon{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;background:#fff;color:#e91e63;font-size:14px;line-height:1}
+.youtube-btn.secondary{background:linear-gradient(135deg,#1769d3,#7657d9);box-shadow:0 9px 24px rgba(23,105,211,.20)}
+.youtube-btn.secondary:hover{box-shadow:0 14px 30px rgba(23,105,211,.28)}
+.youtube-btn.secondary .youtube-icon{color:#1769d3}
+@media(max-width:600px){.youtube-area{gap:10px}.youtube-btn{width:100%;min-width:0;max-width:360px}}
+
+
+/* ===== VERTICAL LESSON SLIDES ===== */
+.lesson-stack{width:min(1080px,100%);margin:0 auto;display:flex;flex-direction:column;gap:26px;}
+.lesson-stack-head{padding:26px 28px;border:1px solid rgba(59,130,246,.15);border-radius:24px;background:rgba(255,255,255,.82);box-shadow:0 12px 35px rgba(30,64,175,.08);text-align:center;}
+.stack-badge{display:inline-flex;padding:7px 14px;border-radius:999px;background:#eff6ff;color:#2563eb;font-weight:800;font-size:13px;margin-bottom:8px;}
+.lesson-stack-head h2{margin:0;color:#172554;font-size:clamp(24px,3vw,34px);}
+.lesson-stack-head p{margin:8px 0 0;color:#64748b;}
+.lesson-slide-card{background:rgba(255,255,255,.94);border:1px solid rgba(148,163,184,.25);border-radius:24px;padding:14px;box-shadow:0 16px 40px rgba(15,23,42,.08);overflow:hidden;opacity:0;transform:translateY(16px);animation:stackIn .55s ease forwards;animation-delay:var(--delay);}
+.lesson-slide-label{display:flex;align-items:center;justify-content:space-between;padding:5px 8px 13px;color:#64748b;font-size:13px;}
+.lesson-slide-label span{font-weight:900;letter-spacing:.08em;color:#2563eb;}
+.lesson-slide-label strong{background:#eff6ff;color:#1d4ed8;padding:6px 11px;border-radius:999px;}
+.lesson-image-wrap{width:100%;aspect-ratio:16/9;border-radius:17px;overflow:hidden;background:#f8fafc;display:flex;align-items:center;justify-content:center;}
+.lesson-image-wrap img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#fff;transition:transform .45s ease;}
+.lesson-slide-card:hover .lesson-image-wrap img{transform:scale(1.012);}
+@keyframes stackIn{to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){.lesson-stack{gap:18px}.lesson-stack-head{padding:20px 16px;border-radius:18px}.lesson-slide-card{padding:9px;border-radius:18px}.lesson-image-wrap{border-radius:12px}.lesson-slide-label{padding-bottom:9px}}
+
+/* ===== IMAGE ZOOM ===== */
+.zoom-hint{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:10px;color:#64748b;font-size:12px;font-weight:700}
+.lesson-image-wrap{position:relative;cursor:zoom-in}
+.zoom-open{position:absolute;right:12px;bottom:12px;border:0;border-radius:999px;padding:9px 13px;background:rgba(23,59,112,.88);color:#fff;font-family:inherit;font-weight:800;font-size:12px;cursor:pointer;box-shadow:0 5px 16px rgba(0,0,0,.18)}
+.zoom-open:hover{background:#1769d3;transform:translateY(-2px)}
+.zoom-modal{position:fixed;inset:0;z-index:100;background:rgba(8,22,45,.92);display:none;align-items:center;justify-content:center;padding:70px 24px 30px}
+.zoom-modal.show{display:flex}
+.zoom-view{max-width:96vw;max-height:82vh;overflow:auto;border-radius:14px;background:#fff;box-shadow:0 20px 70px rgba(0,0,0,.45);touch-action:pan-x pan-y}
+.zoom-view img{display:block;max-width:none;width:auto;height:auto;transform-origin:top left}
+.zoom-toolbar{position:absolute;top:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}
+.zoom-toolbar button{border:0;border-radius:999px;padding:10px 15px;background:#fff;color:#173b70;font-family:inherit;font-weight:800;cursor:pointer;box-shadow:0 5px 18px rgba(0,0,0,.2)}
+.zoom-toolbar button:hover{background:#eaf3ff}
+.zoom-close{background:#ffedf2!important;color:#c02658!important}
+.zoom-caption{position:absolute;bottom:12px;left:0;right:0;text-align:center;color:#dbeafe;font-size:12px;font-weight:700}
+@media(max-width:600px){.zoom-modal{padding:70px 10px 28px}.zoom-open{right:8px;bottom:8px;padding:8px 10px}.zoom-toolbar button{padding:8px 12px;font-size:12px}}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+  <div class="header">
+
+    <div class="logo">
+      AI <b>Learning</b> ป.6
+    </div>
+
+
+    <nav>
+
+      <a href="index.html">
+        หน้าแรก
+      </a>
+
+      <a href="guide.html">
+        คู่มือครู
+      </a>
+
+      <a href="objectives.html">
+        วัตถุประสงค์
+      </a>
+
+      <a href="pretest.html">
+        Pre-test
+      </a>
+
+      <a href="lesson.html" class="active">
+        บทเรียน
+      </a>
+
+      <a href="activity.html">
+        กิจกรรม
+      </a>
+
+      <a href="posttest.html">
+        Post-test
+      </a>
+
+      <a href="summary.html">
+        สรุป
+      </a>
+
+      <a href="teacher.html">
+        ครูผู้สอน
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+  <section class="page">
+
+
+    <div class="title">
+
+      <div class="lesson-badge">
+        ✦ LESSON 01
+      </div>
+
+      <h2>
+        บทเรียน : ปัญญาประดิษฐ์ (AI)
+      </h2>
+
+      <p>
+        เลื่อนดูสไลด์เพื่อเรียนรู้เนื้อหาเกี่ยวกับ AI
+      </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         SLIDER
+    ================================================== -->
+
+    <div class="lesson-stack">
+
+      <div class="lesson-stack-head">
+        <span class="stack-badge">📚 บทเรียน</span>
+        <h2>เรียนรู้เรื่อง AI ทีละสไลด์</h2>
+        <p>เลื่อนลงเพื่อศึกษาเนื้อหาทั้ง 7 สไลด์ได้ตามลำดับ</p>
+      </div>
+
+      <article class="lesson-slide-card">
+        <div class="lesson-slide-label"><span>SLIDE 1</span><strong>1 / 7</strong></div>
+        <div class="lesson-image-wrap">
+          <img src="https://cdn.phototourl.com/member/2026-09-10-161f24ed-e528-4b99-8a39-c75114678342.png" alt="บทเรียน AI สไลด์ที่ 1" loading="lazy" draggable="false"><button class="zoom-open" type="button" aria-label="ซูมภาพ">🔍 ซูมภาพ</button>
+        </div>
+      </article>
+
+      <article class="lesson-slide-card">
+        <div class="lesson-slide-label"><span>SLIDE 2</span><strong>2 / 7</strong></div>
+        <div class="lesson-image-wrap">
+          <img src="https://cdn.phototourl.com/member/2026-09-10-2c7268a1-ca42-4862-82a3-8e805afb81b0.png" alt="บทเรียน AI สไลด์ที่ 2" loading="lazy" draggable="false"><button class="zoom-open" type="button" aria-label="ซูมภาพ">🔍 ซูมภาพ</button>
+        </div>
+      </article>
+
+      <article class="lesson-slide-card">
+        <div class="lesson-slide-label"><span>SLIDE 3</span><strong>3 / 7</strong></div>
+        <div class="lesson-image-wrap">
+          <img src="https://cdn.phototourl.com/member/2026-09-10-9288953b-c261-43b3-8473-7698e2b959ba.png" alt="บทเรียน AI สไลด์ที่ 3" loading="lazy" draggable="false"><button class="zoom-open" type="button" aria-label="ซูมภาพ">🔍 ซูมภาพ</button>
+        </div>
+      </article>
+
+      <article class="lesson-slide-card">
+        <div class="lesson-slide-label"><span>SLIDE 4</span><strong>4 / 7</strong></div>
+        <div class="lesson-image-wrap">
+          <img src="https://cdn.phototourl.com/member/2026-09-10-9988586f-ebd1-4060-b13d-126346089d2f.png" alt="บทเรียน AI สไลด์ที่ 4" loading="lazy" draggable="false"><button class="zoom-open" type="button" aria-label="ซูมภาพ">🔍 ซูมภาพ</button>
+        </div>
+      </article>
+
+      <article class="lesson-slide-card">
+        <div class="lesson-slide-label"><span>SLIDE 5</span><strong>5 / 7</strong></div>
+        <div class="lesson-image-wrap">
+          <img src="https://cdn.phototourl.com/member/2026-09-10-02deba6a-7de4-493c-8300-61a0935b12b2.png" alt="บทเรียน AI สไลด์ที่ 5" loading="lazy" draggable="false"><button class="zoom-open" type="button" aria-label="ซูมภาพ">🔍 ซูมภาพ</button>
+        </div>
+      </article>
+
+      <article class="lesson-slide-card">
+        <div class="lesson-slide-label"><span>SLIDE 6</span><strong>6 / 7</strong></div>
+        <div class="lesson-image-wrap">
+          <img src="https://cdn.phototourl.com/member/2026-09-10-5c1f31b5-1e9f-4c0e-8e09-6ac13f5b3561.png" alt="บทเรียน AI สไลด์ที่ 6" loading="lazy" draggable="false"><button class="zoom-open" type="button" aria-label="ซูมภาพ">🔍 ซูมภาพ</button>
+        </div>
+      </article>
+
+      <article class="lesson-slide-card">
+        <div class="lesson-slide-label"><span>SLIDE 7</span><strong>7 / 7</strong></div>
+        <div class="lesson-image-wrap">
+          <img src="https://cdn.phototourl.com/member/2026-09-10-e1914483-481c-4973-acc5-909661da4f22.png" alt="บทเรียน AI สไลด์ที่ 7" loading="lazy" draggable="false"><button class="zoom-open" type="button" aria-label="ซูมภาพ">🔍 ซูมภาพ</button>
+        </div>
+      </article>
+
+    </div>
+
+
+    <!-- =================================================
+         SOURCE
+    ================================================== -->
+
+    <div class="source-area">
+
+      <a
+        class="source-btn"
+        href="https://kru-it.com/artificial-intelligence/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        <span class="source-icon">
+          🔗
+        </span>
+
+        <span class="source-text">
+
+          <span class="source-title">
+            ที่มาของเนื้อหา
+          </span>
+
+          <span class="source-url">
+            kru-it.com/artificial-intelligence/
+          </span>
+
+        </span>
+
+        <span>
+          ↗
+        </span>
+
+      </a>
+
+    </div>
+
+
+
+
+    <!-- =================================================
+         YOUTUBE VIDEOS
+    ================================================== -->
+    <div class="youtube-area">
+      <a class="youtube-btn" href="https://youtu.be/fsyfqiRD4nY?si=D42sbDdQFNVpyXL9" target="_blank" rel="noopener noreferrer">
+        <span class="youtube-icon">▶</span>
+        <span>วิดีโอการเรียนรู้ที่ 1</span>
+      </a>
+      <a class="youtube-btn secondary" href="https://youtu.be/Ke6reMFayr8?si=bHutwzHsb9MzetQb" target="_blank" rel="noopener noreferrer">
+        <span class="youtube-icon">▶</span>
+        <span>วิดีโอการเรียนรู้ที่ 2</span>
+      </a>
+    </div>
+
+    <!-- =================================================
+         INFO
+    ================================================== -->
+
+    <div class="info-card">
+
+      <h3>
+        💡 เรียนรู้เรื่อง AI
+      </h3>
+
+      <p>
+        ศึกษาเนื้อหาจากสไลด์ทั้ง 7 หน้า
+        โดยสามารถกดปุ่มลูกศร เลือกจุดด้านล่าง
+        หรือเลือกภาพตัวอย่างเพื่อเปลี่ยนสไลด์ได้
+        เมื่อศึกษาเนื้อหาครบแล้ว ให้ไปทำกิจกรรม
+        <b>AI Mission</b> ในหน้าถัดไป
+      </p>
+
+    </div>
+
+
+  </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
+
+<div class="bottom-nav">
+
+  <div class="bottom-inner">
+
+
+    <a
+      class="bottom-btn"
+      href="pretest.html"
+    >
+      ← ย้อนกลับ
+    </a>
+
+
+    <div class="bottom-center">
+      หน้า 5 / 9
+    </div>
+
+
+    <a
+      class="bottom-btn next"
+      href="activity.html"
+    >
+      ถัดไป →
+    </a>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+  AI Learning ป.6 ·
+  เว็บไซต์สื่อการเรียนรู้เรื่องปัญญาประดิษฐ์ (AI)
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+  document.querySelectorAll('.lesson-slide-card').forEach((card, index) => {
+    card.style.setProperty('--delay', `${index * 70}ms`);
+    const img = card.querySelector('img');
+    img.addEventListener('load', () => card.classList.add('loaded'), {once:true});
+  });
+</script>
+
+
+<script>
+(() => {
+  const modal = document.createElement('div');
+  modal.className = 'zoom-modal';
+  modal.setAttribute('role','dialog');
+  modal.setAttribute('aria-modal','true');
+  modal.setAttribute('aria-label','แสดงภาพสไลด์แบบขยาย');
+  modal.innerHTML = `
+    <div class="zoom-toolbar">
+      <button type="button" data-zoom="out">− ลด</button>
+      <button type="button" data-zoom="reset">100%</button>
+      <button type="button" data-zoom="in">＋ ขยาย</button>
+      <button type="button" data-zoom="fit">พอดีจอ</button>
+      <button type="button" class="zoom-close" data-zoom="close">✕ ปิด</button>
+    </div>
+    <div class="zoom-view"><img alt="ภาพสไลด์ขยาย"></div>
+    <div class="zoom-caption">ใช้ปุ่มเพื่อขยายหรือลดขนาดภาพ • กด Esc เพื่อปิด</div>`;
+  document.body.appendChild(modal);
+  const view = modal.querySelector('.zoom-view');
+  const zoomImg = modal.querySelector('img');
+  let scale = 1, naturalW = 0;
+  function render(){ zoomImg.style.width = (naturalW * scale) + 'px'; }
+  function openZoom(img){
+    zoomImg.src = img.currentSrc || img.src;
+    zoomImg.alt = img.alt || 'ภาพสไลด์';
+    scale = 1;
+    zoomImg.onload = () => { naturalW = zoomImg.naturalWidth; render(); };
+    modal.classList.add('show');
+    document.body.style.overflow='hidden';
+  }
+  function closeZoom(){modal.classList.remove('show');document.body.style.overflow='';}
+  document.querySelectorAll('.lesson-image-wrap').forEach(wrap => {
+    const img=wrap.querySelector('img');
+    const btn=wrap.querySelector('.zoom-open');
+    btn.addEventListener('click', e => {e.stopPropagation();openZoom(img);});
+    img.addEventListener('click',()=>openZoom(img));
+  });
+  modal.addEventListener('click', e => {if(e.target===modal) closeZoom();});
+  modal.querySelectorAll('[data-zoom]').forEach(btn => btn.addEventListener('click',()=>{
+    const action=btn.dataset.zoom;
+    if(action==='close') return closeZoom();
+    if(action==='in') scale=Math.min(4,scale+.25);
+    if(action==='out') scale=Math.max(.5,scale-.25);
+    if(action==='reset') scale=1;
+    if(action==='fit') scale=Math.min(1,Math.min((window.innerWidth-45)/naturalW, (window.innerHeight*.78)/(zoomImg.naturalHeight||1)));
+    render();
+  }));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeZoom();});
+})();
+</script>
+
+</body>
+</html>

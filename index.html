@@ -1,0 +1,879 @@
+
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Learning ป.6 | หน้าแรก</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700;800&display=swap');
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  font-family:Anuphan,Arial,sans-serif;
+  color:#173b70;
+}
+
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  background:linear-gradient(135deg,#edf7ff,#fff5fb);
+}
+
+/* LIQUID BACKGROUND */
+#liquid-background{
+  position:fixed;
+  inset:0;
+  z-index:-10;
+  overflow:hidden;
+  background:linear-gradient(135deg,#eaf4ff,#fff7fb);
+}
+
+#liquid-canvas{
+  width:100%;
+  height:100%;
+}
+
+#liquid-overlay{
+  position:fixed;
+  inset:0;
+  z-index:-9;
+  pointer-events:none;
+  background:linear-gradient(
+    180deg,
+    rgba(247,250,255,.45),
+    rgba(247,250,255,.82)
+  );
+}
+
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid #dce8f6;
+  box-shadow:0 5px 22px rgba(30,80,130,.08);
+}
+
+.header{
+  max-width:1220px;
+  min-height:68px;
+  margin:auto;
+  padding:10px 18px;
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+
+.logo{
+  white-space:nowrap;
+  font-size:21px;
+  font-weight:800;
+  color:#1769d3;
+}
+
+.logo b{color:#e64c91}
+
+nav{
+  display:flex;
+  flex:1;
+  gap:4px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+nav::-webkit-scrollbar{display:none}
+
+nav a{
+  padding:9px 11px;
+  border-radius:10px;
+  white-space:nowrap;
+  text-decoration:none;
+  color:#5b708d;
+  font-size:13px;
+  font-weight:700;
+  transition:.25s;
+}
+
+nav a:hover,
+nav a.active{
+  color:#1769d3;
+  background:#edf5ff;
+  transform:translateY(-2px);
+}
+
+/* MAIN */
+main{
+  max-width:1220px;
+  margin:auto;
+  padding:30px 18px 60px;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  min-height:560px;
+  overflow:hidden;
+  border:1px solid rgba(174,210,242,.8);
+  border-radius:34px;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(86,178,255,.25),transparent 28%),
+    radial-gradient(circle at 85% 80%,rgba(242,105,170,.22),transparent 30%),
+    rgba(255,255,255,.7);
+  box-shadow:0 28px 75px rgba(42,91,145,.16);
+  backdrop-filter:blur(14px);
+}
+
+.hero-grid{
+  position:relative;
+  z-index:2;
+  min-height:560px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  align-items:center;
+  gap:20px;
+  padding:45px 55px;
+}
+
+.hero-copy{max-width:650px}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 15px;
+  border:1px solid #d8e7f7;
+  border-radius:999px;
+  background:rgba(255,255,255,.9);
+  color:#4e7199;
+  font-size:12px;
+  font-weight:800;
+  box-shadow:0 7px 20px rgba(40,92,145,.08);
+}
+
+.hero h1{
+  margin:20px 0 15px;
+  color:#173f80;
+  font-size:clamp(40px,5vw,68px);
+  line-height:1.12;
+  font-weight:800;
+  letter-spacing:-1.5px;
+}
+
+.hero h1 span{color:#e64c91}
+
+.hero p{
+  max-width:570px;
+  margin:0 0 25px;
+  color:#607795;
+  font-size:17px;
+  line-height:1.9;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:14px 23px;
+  border-radius:14px;
+  border:0;
+  text-decoration:none;
+  font-family:inherit;
+  font-weight:800;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 15px 30px rgba(30,90,150,.18);
+}
+
+.primary{
+  color:white;
+  background:linear-gradient(135deg,#1769d3,#65aaf1);
+}
+
+.secondary{
+  color:#1769d3;
+  background:white;
+  border:1px solid #d6e6f7;
+}
+
+
+/* 21ST STYLE STREAM */
+.stream{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  perspective:800px;
+}
+
+.stream-card{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:105px;
+  height:140px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:18px;
+  color:#1769d3;
+  background:rgba(255,255,255,.7);
+  box-shadow:0 15px 35px rgba(32,79,132,.13);
+  font-weight:800;
+  animation:stream 13s linear infinite;
+}
+
+.stream-card:nth-child(2){animation-delay:-2s}
+.stream-card:nth-child(3){animation-delay:-4s}
+.stream-card:nth-child(4){animation-delay:-6s}
+.stream-card:nth-child(5){animation-delay:-8s}
+.stream-card:nth-child(6){animation-delay:-10s}
+
+@keyframes stream{
+  0%{
+    opacity:0;
+    transform:translate3d(-30px,0,-500px) scale(.2);
+  }
+  15%{opacity:.7}
+  75%{opacity:.8}
+  100%{
+    opacity:0;
+    transform:translate3d(400px,0,220px) scale(2.7);
+  }
+}
+
+/* ROBOT */
+.hero-art{
+  position:relative;
+  height:400px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.orbit{
+  position:absolute;
+  width:320px;
+  height:320px;
+  border:1px dashed rgba(71,146,220,.4);
+  border-radius:50%;
+  animation:spin 18s linear infinite;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.robot{
+  position:relative;
+  width:205px;
+  height:250px;
+  filter:drop-shadow(0 20px 18px rgba(34,88,142,.2));
+  animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+}
+
+.r-head{
+  position:absolute;
+  top:30px;
+  left:38px;
+  width:130px;
+  height:103px;
+  border:5px solid #559de7;
+  border-radius:32px;
+  background:linear-gradient(145deg,#fff,#dff2ff);
+  z-index:3;
+}
+
+.r-ear{
+  position:absolute;
+  top:33px;
+  width:17px;
+  height:34px;
+  border:4px solid #559de7;
+  border-radius:12px;
+  background:#9dd0f6;
+}
+
+.r-ear.l{left:-16px}
+.r-ear.r{right:-16px}
+
+.r-eye{
+  position:absolute;
+  top:34px;
+  width:17px;
+  height:22px;
+  border-radius:50%;
+  background:#1769d3;
+  animation:blink 4s infinite;
+}
+
+.r-eye.l{left:31px}
+.r-eye.r{right:31px}
+
+@keyframes blink{
+  0%,45%,50%,100%{transform:scaleY(1)}
+  47%{transform:scaleY(.08)}
+}
+
+.r-smile{
+  position:absolute;
+  left:43px;
+  bottom:15px;
+  width:44px;
+  height:21px;
+  border-bottom:6px solid #ed609d;
+  border-radius:0 0 30px 30px;
+}
+
+.r-antenna{
+  position:absolute;
+  top:-35px;
+  left:62px;
+  width:5px;
+  height:34px;
+  background:#559de7;
+}
+
+.r-dot{
+  position:absolute;
+  top:-13px;
+  left:-6px;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  background:#ffc64d;
+  box-shadow:0 0 18px #ffc64d;
+  animation:pulse 1s infinite alternate;
+}
+
+@keyframes pulse{to{transform:scale(1.25)}}
+
+.r-body{
+  position:absolute;
+  top:126px;
+  left:48px;
+  width:110px;
+  height:92px;
+  border:5px solid #559de7;
+  border-radius:28px;
+  background:linear-gradient(145deg,#fff,#dceeff);
+}
+
+.r-screen{
+  position:absolute;
+  top:24px;
+  left:29px;
+  width:52px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  border:3px solid #78b8ec;
+  border-radius:10px;
+  color:#1769d3;
+  background:#bce3ff;
+  font-size:14px;
+  font-weight:800;
+}
+
+.r-heart{
+  position:absolute;
+  right:13px;
+  bottom:13px;
+  color:#ed609d;
+  font-size:21px;
+  animation:heart 1s infinite;
+}
+
+@keyframes heart{50%{transform:scale(1.3)}}
+
+.r-arm{
+  position:absolute;
+  z-index:2;
+  width:23px;
+  height:75px;
+  border:5px solid #559de7;
+  border-radius:16px;
+  background:#dceeff;
+  transform-origin:top center;
+}
+
+.r-arm.l{
+  top:137px;
+  left:27px;
+  transform:rotate(25deg);
+}
+
+.r-arm.r{
+  top:128px;
+  right:19px;
+  transform:rotate(-48deg);
+  animation:hello .7s ease-in-out infinite alternate;
+}
+
+@keyframes hello{to{transform:rotate(-12deg)}}
+
+.r-hand{
+  position:absolute;
+  top:-17px;
+  left:-7px;
+  width:28px;
+  height:28px;
+  border:4px solid #559de7;
+  border-radius:50%;
+  background:#b9dcfa;
+}
+
+.r-leg{
+  position:absolute;
+  top:207px;
+  width:27px;
+  height:47px;
+  border:5px solid #559de7;
+  border-radius:15px;
+  background:#dceeff;
+}
+
+.r-leg.l{left:68px}
+.r-leg.r{right:67px}
+
+/* LEARNING PATH */
+.path{
+  margin-top:55px;
+}
+
+.path-title{
+  margin-bottom:22px;
+  text-align:center;
+}
+
+.path-title h2{
+  margin:0;
+  color:#173f80;
+  font-size:32px;
+}
+
+.path-title p{
+  margin:7px 0;
+  color:#6b7f9b;
+}
+
+.home-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.home-btn{
+  position:relative;
+  min-height:170px;
+  padding:23px;
+  overflow:hidden;
+  border:1px solid #dce9f7;
+  border-radius:20px;
+  background:rgba(255,255,255,.87);
+  box-shadow:0 8px 24px rgba(49,95,150,.08);
+  text-decoration:none;
+  transition:.25s;
+}
+
+.home-btn:hover{
+  transform:translateY(-6px);
+  border-color:#a9d0f3;
+  box-shadow:0 18px 35px rgba(49,95,150,.15);
+}
+
+.home-btn:after{
+  content:"→";
+  position:absolute;
+  top:18px;
+  right:20px;
+  color:#9bb3cd;
+  font-size:22px;
+  transition:.2s;
+}
+
+.home-btn:hover:after{
+  color:#1769d3;
+  transform:translateX(5px);
+}
+
+.home-icon{
+  width:50px;
+  height:50px;
+  display:grid;
+  place-items:center;
+  margin-bottom:14px;
+  border-radius:15px;
+  color:white;
+  background:linear-gradient(135deg,#1769d3,#63a9ef);
+  font-weight:800;
+}
+
+.home-btn:nth-child(2) .home-icon{
+  background:linear-gradient(135deg,#e64c91,#f58ab8);
+}
+
+.home-btn:nth-child(3) .home-icon{
+  background:linear-gradient(135deg,#f39b2f,#ffc15a);
+}
+
+.home-btn:nth-child(4) .home-icon{
+  background:linear-gradient(135deg,#15945d,#5dcc91);
+}
+
+.home-btn:nth-child(5) .home-icon{
+  background:linear-gradient(135deg,#7657d9,#a98df1);
+}
+
+.home-btn:nth-child(6) .home-icon{
+  background:linear-gradient(135deg,#1599aa,#62d1dc);
+}
+
+.home-btn:nth-child(7) .home-icon{
+  background:linear-gradient(135deg,#e66b43,#f7a06f);
+}
+
+.home-btn:nth-child(8) .home-icon{
+  background:linear-gradient(135deg,#2d6cae,#65b6e9);
+}
+
+.home-btn h3{
+  margin:0 0 6px;
+  color:#294e82;
+  font-size:18px;
+}
+
+.home-btn p{
+  margin:0;
+  color:#6a7e99;
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* FOOTER */
+footer{
+  padding:28px 18px;
+  border-top:1px solid #dbe7f6;
+  color:#7385a0;
+  background:rgba(255,255,255,.7);
+  text-align:center;
+  font-size:13px;
+}
+
+/* RESPONSIVE */
+@media(max-width:950px){
+  .hero-grid{
+    grid-template-columns:1fr;
+    padding:40px 25px;
+  }
+
+  .hero-copy{
+    max-width:700px;
+    margin:auto;
+    text-align:center;
+  }
+
+  .hero p{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .actions{
+    justify-content:center;
+  }
+.home-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:600px){
+  .header{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  nav{width:100%}
+
+  main{
+    padding:16px 12px 40px;
+  }
+
+  .hero{
+    border-radius:25px;
+  }
+
+  .hero-grid{
+    padding:30px 17px;
+  }
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .hero-art{
+    height:280px;
+  }
+
+  .orbit{
+    width:240px;
+    height:240px;
+  }
+
+  .robot{
+    transform:scale(.8);
+  }
+.home-grid{
+    grid-template-columns:1fr;
+  }
+
+  .path-title h2{
+    font-size:27px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation:none!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="liquid-background">
+  <canvas id="liquid-canvas"></canvas>
+</div>
+
+<div id="liquid-overlay"></div>
+
+<header>
+  <div class="header">
+    <div class="logo">AI <b>Learning</b> ป.6</div>
+
+    <nav>
+      <a href="index.html" class="active">หน้าแรก</a>
+      <a href="guide.html">คู่มือครู</a>
+      <a href="objectives.html">วัตถุประสงค์</a>
+      <a href="pretest.html">Pre-test</a>
+      <a href="lesson.html">บทเรียน</a>
+      <a href="activity.html">กิจกรรม</a>
+      <a href="posttest.html">Post-test</a>
+      <a href="summary.html">สรุป</a>
+      <a href="teacher.html">ครูผู้สอน</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+
+  <div class="stream" aria-hidden="true">
+    <div class="stream-card">AI</div>
+    <div class="stream-card">DATA</div>
+    <div class="stream-card">SMART</div>
+    <div class="stream-card">ROBOT</div>
+    <div class="stream-card">VOICE</div>
+    <div class="stream-card">VISION</div>
+  </div>
+
+  <div class="hero-grid">
+
+    <div class="hero-copy">
+
+      <div class="badge">
+        ✦ Interactive AI Learning · ป.6
+      </div>
+
+      <h1>
+        ยินดีต้อนรับ<br>
+        สู่โลกแห่ง<br>
+        <span>ปัญญาประดิษฐ์</span>
+      </h1>
+
+      <p>
+        เรียนรู้ เข้าใจ และสนุกไปกับเทคโนโลยี AI
+        ผ่านบทเรียน กิจกรรมเกม และแบบทดสอบ
+        พร้อมก้าวสู่ห้องเรียนแห่งอนาคตอย่างสร้างสรรค์
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="guide.html">
+          🚀 เริ่มต้นการเรียนรู้
+        </a>
+
+        <a class="btn secondary" href="lesson.html">
+          ▶ ดูบทเรียน
+        </a>
+      </div>
+
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+
+      <div class="orbit"></div>
+
+      <div class="robot">
+
+        <div class="r-antenna">
+          <div class="r-dot"></div>
+        </div>
+
+        <div class="r-head">
+          <div class="r-ear l"></div>
+          <div class="r-ear r"></div>
+          <div class="r-eye l"></div>
+          <div class="r-eye r"></div>
+          <div class="r-smile"></div>
+        </div>
+
+        <div class="r-body">
+          <div class="r-screen">AI</div>
+          <div class="r-heart">♥</div>
+        </div>
+
+        <div class="r-arm l">
+          <div class="r-hand"></div>
+        </div>
+
+        <div class="r-arm r">
+          <div class="r-hand"></div>
+        </div>
+
+        <div class="r-leg l"></div>
+        <div class="r-leg r"></div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="path">
+
+  <div class="path-title">
+    <h2>เส้นทางการเรียนรู้</h2>
+    <p>เลือกหัวข้อที่ต้องการ หรือเรียนตามลำดับตั้งแต่ต้นจนจบ</p>
+  </div>
+
+  <div class="home-grid">
+
+    <a class="home-btn" href="guide.html">
+      <div class="home-icon">01</div>
+      <h3>คู่มือครู</h3>
+      <p>แนวทางการใช้งานเว็บไซต์</p>
+    </a>
+
+    <a class="home-btn" href="objectives.html">
+      <div class="home-icon">02</div>
+      <h3>วัตถุประสงค์</h3>
+      <p>สิ่งที่นักเรียนควรรู้และทำได้</p>
+    </a>
+
+    <a class="home-btn" href="pretest.html">
+      <div class="home-icon">03</div>
+      <h3>Pre-test</h3>
+      <p>แบบทดสอบก่อนเรียน 10 ข้อ</p>
+    </a>
+
+    <a class="home-btn" href="lesson.html">
+      <div class="home-icon">04</div>
+      <h3>บทเรียน</h3>
+      <p>เรียนรู้ AI ทีละหัวข้อ</p>
+    </a>
+
+    <a class="home-btn" href="activity.html">
+      <div class="home-icon">05</div>
+      <h3>AI Mission</h3>
+      <p>กิจกรรมเกมแบบลงมือเล่น</p>
+    </a>
+
+    <a class="home-btn" href="posttest.html">
+      <div class="home-icon">06</div>
+      <h3>Post-test</h3>
+      <p>แบบทดสอบหลังเรียนพร้อมเฉลย</p>
+    </a>
+
+    <a class="home-btn" href="summary.html">
+      <div class="home-icon">07</div>
+      <h3>สรุปบทเรียน</h3>
+      <p>ทบทวนสิ่งสำคัญเกี่ยวกับ AI</p>
+    </a>
+
+    <a class="home-btn" href="teacher.html">
+      <div class="home-icon">08</div>
+      <h3>ครูผู้สอน</h3>
+      <p>ข้อมูลผู้สอนและผู้จัดทำ</p>
+    </a>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  AI Learning ป.6 · เว็บไซต์สื่อการเรียนรู้เรื่องปัญญาประดิษฐ์ (AI)
+</footer>
+
+
+
+<script type="module">
+import LiquidBackground from
+"https://cdn.jsdelivr.net/npm/threejs-components@0.0.22/build/backgrounds/liquid1.min.js";
+
+const canvas = document.getElementById("liquid-canvas");
+
+if(canvas){
+  try{
+    const app = LiquidBackground(canvas);
+
+    app.loadImage(
+      "https://cdn.21st.dev/assets/mirror/95/95e97d22cb2df434400243c60803fb89a5e25a46dad13c4a6d5cb27246173cf0.png"
+    );
+
+    app.liquidPlane.material.metalness = .75;
+    app.liquidPlane.material.roughness = .25;
+    app.liquidPlane.uniforms.displacementScale.value = 5;
+    app.setRain(false);
+
+    window.__liquidApp = app;
+
+  }catch(error){
+    console.warn("Liquid effect error:",error);
+  }
+}
+
+window.addEventListener("beforeunload",()=>{
+  if(window.__liquidApp?.dispose){
+    window.__liquidApp.dispose();
+  }
+});
+</script>
+
+</body>
+</html>

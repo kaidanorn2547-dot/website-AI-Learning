@@ -1,0 +1,844 @@
+<!doctype html><html lang="th"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>AI Learning ป.6 | กิจกรรม</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700;800&display=swap');
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:Anuphan,Arial,sans-serif;color:#173b70}
+body{background:#f5f9ff url('https://cdn.phototourl.com/free/2026-09-08-221b082d-d9a2-40ae-99c0-58bf2ae706b6.png') center top/cover fixed no-repeat;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;background:rgba(247,250,255,.87);z-index:-1}
+header{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid #dce7f5;box-shadow:0 2px 14px rgba(35,75,120,.10)}
+.header{max-width:1180px;margin:auto;min-height:66px;padding:10px 18px;display:flex;align-items:center;gap:24px}
+.logo{font-size:20px;font-weight:800;color:#1769d3;white-space:nowrap}.logo b{color:#e64c91}
+nav{display:flex;gap:3px;flex:1;overflow:auto}nav a{padding:9px 10px;border-radius:9px;text-decoration:none;color:#5b708d;font-size:13px;font-weight:700;white-space:nowrap}nav a:hover{background:#edf5ff;color:#1769d3}
+main{max-width:1180px;margin:auto;padding:26px 18px 105px}
+.hero{min-height:410px;border-radius:28px;padding:48px;display:flex;align-items:center;background:linear-gradient(135deg,rgba(255,255,255,.97),rgba(239,247,255,.95));border:1px solid #d8e7f8;box-shadow:0 18px 45px rgba(43,91,145,.14);position:relative;overflow:hidden}
+.hero:after{content:"AI";position:absolute;right:30px;bottom:-75px;font-size:240px;font-weight:800;color:#eaf3ff;z-index:0}
+.hero>div{max-width:750px;position:relative;z-index:1}
+.tag{display:inline-block;padding:7px 13px;border-radius:99px;background:#edf5ff;color:#1769d3;font-size:13px;font-weight:800}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.18;margin:15px 0 12px;color:#173f80}h1 span{color:#e64c91}
+.hero p{color:#607795;line-height:1.85;font-size:17px}
+.page{margin-top:20px}.title{margin-bottom:18px}.title h2{margin:0;font-size:30px;color:#173f80}.title p{margin:5px 0;color:#6b7f9b}
+.home-grid,.cards,.lesson-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:17px}
+.home-grid{grid-template-columns:repeat(3,1fr)}
+.home-btn{position:relative;min-height:160px;padding:24px;text-decoration:none;background:#fff;border:1px solid #d8e6f6;border-radius:20px;box-shadow:0 8px 24px rgba(49,95,150,.10);transition:.18s;overflow:hidden}
+.home-btn:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(49,95,150,.16)}
+.home-icon{width:53px;height:53px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#1769d3,#63a9ef);color:#fff;font-size:18px;font-weight:800;margin-bottom:13px}
+.home-btn:nth-child(2) .home-icon{background:linear-gradient(135deg,#e64c91,#f58ab8)}.home-btn:nth-child(3) .home-icon{background:linear-gradient(135deg,#f39b2f,#ffc15a)}.home-btn:nth-child(4) .home-icon{background:linear-gradient(135deg,#15945d,#5dcc91)}.home-btn:nth-child(5) .home-icon{background:linear-gradient(135deg,#7657d9,#a98df1)}.home-btn:nth-child(6) .home-icon{background:linear-gradient(135deg,#1599aa,#62d1dc)}
+.home-btn h3{margin:0 0 5px;color:#294e82;font-size:20px}.home-btn p{margin:0;color:#6a7e99;font-size:14px;line-height:1.6}
+.card,.lesson,.quiz,.game,.stat{background:#fff;border:1px solid #dbe7f6;border-radius:18px;box-shadow:0 7px 22px rgba(49,95,150,.08)}
+.card,.lesson{padding:23px}.card h3,.lesson h3{color:#294e82;margin:8px 0}.card p,.lesson p,.lesson li{color:#5d7391;line-height:1.8}.lesson label{font-size:12px;color:#1769d3;font-weight:800}
+.note{background:#f0f7ff;border-left:4px solid #2c83e8;padding:11px 13px;border-radius:7px;font-size:14px;color:#41658e}
+.quiz{padding:23px}.question{padding:16px 0;border-bottom:1px solid #e7eef7}.question:last-child{border:0}.question h4{margin:0 0 10px;color:#294e82}
+.option{display:block;padding:9px;border-radius:9px;color:#5e7390;cursor:pointer}.option:hover{background:#f0f6ff}.option input{accent-color:#1769d3;margin-right:7px}
+.btn{display:inline-block;border:0;border-radius:11px;padding:11px 18px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none}
+.primary{background:#1769d3;color:#fff}.secondary{background:#fff;color:#1769d3;border:1px solid #cadcf2}
+.result{display:none;margin-top:17px;padding:17px;border-radius:12px;background:#eef8f2;border:1px solid #ccebd9}.score{font-size:31px;font-weight:800;color:#15945d}.answer{margin:7px 0;color:#4e6b59;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.stat{padding:22px}.stat h3{margin:0 0 8px;color:#536a88;font-size:15px}.value{font-size:31px;font-weight:800;color:#1769d3}
+.game{padding:28px;text-align:center}.game-box{max-width:760px;margin:auto;background:linear-gradient(145deg,#f8fbff,#eef6ff);border:1px solid #dce9f8;border-radius:20px;padding:25px}
+.game-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}.badge{background:#1769d3;color:#fff;padding:7px 13px;border-radius:99px;font-size:13px;font-weight:800}
+.game-q{font-size:22px;font-weight:800;color:#214b82;margin:20px 0}
+.game-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.game-option{border:2px solid #d3e2f2;background:#fff;border-radius:13px;padding:16px;cursor:pointer;font:inherit;color:#496582;font-weight:700;transition:.15s}.game-option:hover{transform:translateY(-2px);border-color:#7fb2ef;background:#f7fbff}
+.game-option.correct{border-color:#15945d;background:#eef8f2}.game-option.wrong{border-color:#d65b65;background:#fff0f1}
+.game-feedback{min-height:30px;margin:17px 0 8px;font-weight:800;font-size:17px}
+.progress-wrap{height:9px;background:#dfeaf7;border-radius:99px;overflow:hidden;margin:14px 0 5px}.progress{height:100%;width:0;background:#1769d3;transition:.25s}
+.sort-zone{display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left;margin-top:20px}.dropbox{min-height:220px;border:2px dashed #bfd3ea;border-radius:16px;background:#f8fbff;padding:15px}.dropbox h3{margin:0 0 10px;color:#294e82;font-size:17px}.drag-item{background:#fff;border:1px solid #d3e2f2;border-radius:11px;padding:12px;margin:8px 0;cursor:grab;box-shadow:0 3px 10px rgba(0,0,0,.05)}.drag-item.selected{border:2px solid #1769d3;background:#edf5ff}.drag-item.done{opacity:.55;cursor:default}.drag-hint{font-size:13px;color:#7186a3;text-align:center;margin-top:12px}
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.97);border-top:1px solid #dbe7f6;box-shadow:0 -4px 15px rgba(35,75,120,.10)}
+.bottom-inner{max-width:1180px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:10px 18px;gap:12px}
+.bottom-btn{min-width:120px;padding:11px 17px;border-radius:11px;text-decoration:none;font-weight:800;text-align:center;border:1px solid #cadcf2;background:#fff;color:#1769d3}
+.bottom-btn.next{background:#1769d3;color:#fff;border-color:#1769d3}.bottom-center{font-size:12px;color:#7a8ca3}
+footer{background:#fff;border-top:1px solid #dbe7f6;text-align:center;padding:24px;color:#7385a0;font-size:13px}
+@media(max-width:850px){.home-grid,.lesson-grid,.cards,.stats,.sort-zone{grid-template-columns:1fr 1fr}nav a{font-size:12px;padding:8px 7px}}
+@media(max-width:600px){.header{align-items:flex-start;flex-direction:column}nav{width:100%}main{padding:16px 12px 95px}.hero{padding:30px 22px;min-height:380px}.home-grid,.lesson-grid,.cards,.stats,.game-options,.sort-zone{grid-template-columns:1fr}h1{font-size:34px}.bottom-center{display:none}.bottom-btn{min-width:105px}}
+
+/* 21st.dev-inspired UI layer adapted for this static HTML site.
+   The original Image Stream Hero is a React/TypeScript component;
+   this version recreates its visual idea in vanilla HTML/CSS so the site
+   remains a no-build multi-page website. */
+body:before{background:rgba(247,250,255,.84)}
+.hero-21{min-height:440px;position:relative;overflow:hidden;border-radius:30px;
+background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.98),rgba(235,245,255,.94) 55%,rgba(222,237,255,.88));
+border:1px solid rgba(173,204,238,.75);box-shadow:0 24px 65px rgba(39,91,150,.16)}
+.stream{position:absolute;inset:0;perspective:800px;overflow:hidden;pointer-events:none}
+.stream-card{position:absolute;left:50%;top:52%;width:105px;height:140px;margin:-70px 0 0 -52px;border-radius:18px;
+overflow:hidden;border:1px solid rgba(255,255,255,.8);box-shadow:0 14px 35px rgba(32,79,132,.18);
+background:linear-gradient(145deg,#fff,#eaf4ff);display:grid;place-items:center;font-weight:800;color:#1769d3;
+animation:streamRight 13s linear infinite}
+.stream-card:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.35),transparent 45%,rgba(23,105,211,.08))}
+.stream-card:nth-child(even){animation-name:streamLeft}
+.stream-card:nth-child(1){animation-delay:-1s}.stream-card:nth-child(2){animation-delay:-3s}.stream-card:nth-child(3){animation-delay:-5s}
+.stream-card:nth-child(4){animation-delay:-7s}.stream-card:nth-child(5){animation-delay:-9s}.stream-card:nth-child(6){animation-delay:-11s}
+@keyframes streamRight{
+0%{transform:translate3d(-30px,0,-500px) rotateY(10deg) scale(.18);opacity:0}
+12%{opacity:.72}70%{opacity:.9}100%{transform:translate3d(420px,0,220px) rotateY(-24deg) scale(2.8);opacity:0}}
+@keyframes streamLeft{
+0%{transform:translate3d(30px,0,-500px) rotateY(-10deg) scale(.18);opacity:0}
+12%{opacity:.72}70%{opacity:.9}100%{transform:translate3d(-420px,0,220px) rotateY(24deg) scale(2.8);opacity:0}}
+.hero-content-21{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;text-align:center;height:440px;padding:30px}
+.hero-content-21>div{max-width:760px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.9);
+border-radius:24px;padding:30px 34px;box-shadow:0 18px 50px rgba(42,86,140,.12)}
+.glow-dot{position:absolute;width:180px;height:180px;border-radius:50%;filter:blur(45px);opacity:.25;background:#5aa4ef;left:10%;top:15%}
+.glow-dot.two{left:auto;right:8%;top:auto;bottom:8%;background:#ed6fa7}
+.spotlight-card{position:relative;overflow:hidden}
+.spotlight-card:before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;left:var(--mx,50%);top:var(--my,50%);
+transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(76,151,235,.20),transparent 65%);pointer-events:none;transition:left .12s,top .12s}
+.shiny{position:relative;overflow:hidden}
+.shiny:after{content:"";position:absolute;top:-80%;left:-60%;width:35%;height:260%;transform:rotate(25deg);
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transition:transform .6s}
+.shiny:hover:after{transform:translateX(420%) rotate(25deg)}
+.pill21{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #d8e6f6;
+box-shadow:0 5px 18px rgba(45,90,145,.08);font-size:12px;font-weight:800;color:#507094}
+@media(prefers-reduced-motion:reduce){.stream-card{animation-play-state:paused}}
+</style>
+<style>
+/* ===== AI SHOOTER: replaces the old sorting-game visual only ===== */
+
+.shooter-wrap{max-width:1120px;margin:auto}
+.shooter-hud{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:10px}
+.shooter-stat{background:#fff;border:1px solid #d7e7f7;border-radius:13px;padding:8px;text-align:center;box-shadow:0 4px 13px rgba(35,90,145,.06)}
+.shooter-stat small{display:block;color:#7b91a8;font-size:10px}
+.shooter-stat b{display:block;color:#1769d3;font-size:16px;margin-top:2px}
+.shooter-stat:nth-child(1) b{color:#e34e78}
+.shooter-stat:nth-child(3) b{color:#0b9bbd}
+
+.shooter-board{position:relative;display:grid;grid-template-columns:46% 54%;min-height:545px;overflow:hidden;border:2px solid #b8ddf5;border-radius:21px;background:#dff4ff;box-shadow:0 12px 35px rgba(35,90,145,.12)}
+
+.battle-zone{position:relative;min-width:0;overflow:hidden;background:linear-gradient(180deg,#bce8ff 0%,#dff5ff 52%,#effaff 72%,#b9dcf0 100%);border-right:2px solid rgba(80,150,200,.18)}
+.battle-zone:before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,#fff 1px,transparent 2px),radial-gradient(circle,#73bfe9 1px,transparent 2px);background-size:70px 70px,120px 120px;opacity:.55}
+.sun{position:absolute;width:90px;height:90px;right:10%;top:35px;border-radius:50%;background:#fff;opacity:.72;box-shadow:0 0 55px rgba(74,183,239,.45)}
+.cloud{position:absolute;font-size:33px;opacity:.72;animation:cloudMove 10s ease-in-out infinite}
+.cloud.c1{left:9%;top:62px}.cloud.c2{right:27%;top:115px;animation-delay:-4s}
+@keyframes cloudMove{0%,100%{transform:translateX(-9px)}50%{transform:translateX(18px)}}
+
+.battle-title{position:absolute;top:14px;left:16px;z-index:8;padding:6px 11px;border-radius:99px;background:rgba(255,255,255,.88);border:1px solid #c7e1f4;color:#1769d3;font-size:11px;font-weight:800}
+
+.battle-distance{position:absolute;z-index:8;left:50%;top:17px;transform:translateX(-50%);width:62%;text-align:center}
+.battle-distance span{display:inline-block;padding:5px 11px;background:rgba(255,255,255,.88);border:1px solid #c8e1f4;border-radius:99px;color:#57738e;font-size:10px;font-weight:800}
+.battle-distance>div{height:7px;margin-top:4px;border-radius:99px;background:rgba(255,255,255,.75);overflow:hidden}
+.battle-distance i{display:block;width:100%;height:100%;background:linear-gradient(90deg,#2eae76,#48a9e2,#e75b78);transition:.45s}
+
+.city{position:absolute;left:0;right:0;bottom:61px;height:115px;display:flex;align-items:flex-end;gap:3px;opacity:.3}
+.city span{display:block;flex:1;background:#4b8eb9;border-top:3px solid #92d2ef}
+.city span:nth-child(1){height:55%}.city span:nth-child(2){height:78%}.city span:nth-child(3){height:62%}.city span:nth-child(4){height:94%}.city span:nth-child(5){height:68%}.city span:nth-child(6){height:84%}.city span:nth-child(7){height:58%}
+.city span:after{content:"";display:block;margin:8px;height:70%;background:repeating-linear-gradient(to bottom,#d8f3ff 0 5px,transparent 5px 14px)}
+
+.ground{position:absolute;left:0;right:0;bottom:0;height:62px;background:linear-gradient(#71b9e4,#428dc0);border-top:4px solid #fff}
+.ground:after{content:"";position:absolute;inset:auto 0 0;height:27px;background:repeating-linear-gradient(135deg,rgba(255,255,255,.13) 0 15px,transparent 15px 30px)}
+
+.player{position:absolute;left:8%;bottom:70px;width:100px;height:145px;z-index:12;transition:.35s}
+.player-head{position:absolute;left:19px;top:0;width:62px;height:62px;border-radius:50%;background:#f4cfb1;border:4px solid #0877d1}
+.player-head i{position:absolute;top:22px;width:8px;height:8px;border-radius:50%;background:#173b70}
+.player-head i:first-child{left:13px}.player-head i:last-child{right:13px}
+.player-body{position:absolute;left:23px;top:57px;width:57px;height:75px;border-radius:18px 18px 12px 12px;background:linear-gradient(145deg,#6bc8f8,#0877d1);border:3px solid #fff}
+.player-gun{position:absolute;top:70px;right:-36px;width:67px;height:15px;border-radius:10px;background:#304f69;border:2px solid #fff;transform:rotate(-5deg)}
+.player-gun:after{content:"";position:absolute;right:-8px;top:-5px;width:14px;height:23px;border-radius:4px;background:#0877d1}
+.player>strong{position:absolute;bottom:-22px;width:100%;text-align:center;color:#0877d1;font-size:10px}
+
+.enemy{position:absolute;right:7%;bottom:70px;width:108px;height:150px;z-index:12;transition:right .5s ease,transform .25s}
+.enemy-head{position:absolute;left:11px;top:0;width:82px;height:75px;border-radius:24px 24px 35px 35px;background:#123e69;border:4px solid #54b4ec}
+.enemy-body{position:absolute;left:18px;top:67px;width:72px;height:82px;border-radius:24px 24px 12px 12px;background:linear-gradient(145deg,#4a9bd0,#174d7b);border:3px solid #9edbfd}
+.enemy-head i{position:absolute;top:27px;width:16px;height:16px;border-radius:50%;background:#9cecff;box-shadow:0 0 15px #54d8ff}
+.enemy-head i:first-child{left:14px}.enemy-head i:last-child{right:14px}
+.enemy>strong{position:absolute;bottom:-23px;width:100%;text-align:center;color:#0877d1;font-size:10px}
+.enemy-hp{position:absolute;z-index:15;top:-25px;left:4px;width:100px;text-align:center}
+.enemy-hp small{font-size:8px;color:#4c6f8c;font-weight:800}
+.enemy-hp div{height:7px;background:#d8e7f2;border-radius:99px;overflow:hidden}
+.enemy-hp i{display:block;width:100%;height:100%;background:#0877d1;transition:.25s}
+
+.question-zone{position:relative;background:rgba(255,255,255,.97);padding:28px 28px 22px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.question-zone:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(#0877d1,#57b7ed)}
+.q-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.mission-badge{display:inline-block;background:#0877d1;color:#fff;padding:7px 13px;border-radius:99px;font-size:11px;font-weight:800}
+.q-source{color:#7890a7;font-size:10px}
+.mission-tip{padding:8px 10px;background:#eef8ff;border:1px solid #d2e7f6;border-radius:10px;color:#668099;font-size:11px;margin-bottom:13px;text-align:center}
+.game-question{font-size:clamp(18px,2vw,23px);font-weight:800;line-height:1.55;color:#204f80;margin-bottom:15px}
+.game-options{display:grid;grid-template-columns:1fr;gap:9px}
+.game-option{min-height:51px;padding:10px 13px;border-radius:12px;border:2px solid #d2e4f4;background:#f9fcff;color:#4a6883;font-family:inherit;font-size:13px;font-weight:700;text-align:left;cursor:pointer;transition:.15s}
+.game-option:hover{transform:translateX(4px);border-color:#68afe0;background:#eef8ff}
+.game-option.correct{border-color:#15945d;background:#eef9f3;color:#167346}
+.game-option.wrong{border-color:#d65b65;background:#fff0f1;color:#a33445}
+.game-option:disabled{cursor:default}
+.game-feedback{min-height:28px;margin-top:10px;text-align:center;font-size:12px;font-weight:800;color:#55708c;line-height:1.5}
+
+.bullet{position:absolute;width:34px;height:8px;border-radius:99px;background:#fff;box-shadow:0 0 8px #fff,0 0 20px #11b1f3;z-index:50}
+.explosion{position:absolute;z-index:60;font-size:54px;pointer-events:none;animation:boom .6s forwards}
+@keyframes boom{0%{opacity:1;transform:scale(.25) rotate(-15deg)}100%{opacity:0;transform:scale(1.7) rotate(15deg)}}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.battle-message{position:absolute;left:50%;top:105px;transform:translateX(-50%);z-index:70;padding:7px 16px;background:rgba(255,255,255,.94);border:1px solid #c6e0f3;border-radius:99px;color:#0877d1;font-size:15px;font-weight:800;opacity:0;pointer-events:none;white-space:nowrap}
+.battle-message.show{animation:msg .9s forwards}
+@keyframes msg{0%{opacity:0;transform:translate(-50%,12px)}20%,75%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-12px)}}
+
+.shooter-modal{position:absolute;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(237,249,255,.94);backdrop-filter:blur(7px)}
+.shooter-modal.hidden{display:none}
+.shooter-modal-card{width:min(460px,92%);background:#fff;border:1px solid #cce3f5;border-radius:23px;padding:27px;text-align:center;box-shadow:0 20px 60px rgba(30,100,160,.18)}
+.modal-icon{font-size:58px}.shooter-modal-card h2{color:#0877d1;font-size:29px;margin:5px 0 9px}.shooter-modal-card p{color:#627c96;font-size:13px;line-height:1.8}
+.shooter-btn{margin-top:13px}
+
+@media(max-width:850px){
+  .shooter-board{grid-template-columns:1fr}
+  .battle-zone{min-height:350px;border-right:0;border-bottom:2px solid rgba(80,150,200,.18)}
+  .question-zone{min-height:460px}
+}
+@media(max-width:600px){
+  .shooter-hud{grid-template-columns:1fr 1fr}
+  .battle-zone{min-height:315px}
+  .question-zone{padding:20px 16px}
+  .game-question{font-size:17px}
+  .game-option{font-size:12px;min-height:47px}
+}
+</style>
+<style>
+.activity-guide{margin:0 0 24px;padding:24px;background:linear-gradient(135deg,#ffffff,#eef7ff);border:1px solid #d7e7f7;border-radius:22px;box-shadow:0 10px 28px rgba(49,95,150,.10);text-align:center}
+.activity-guide h2{margin:0 0 8px;color:#173f80;font-size:28px}
+.activity-guide p{margin:7px auto;color:#617895;line-height:1.8;max-width:780px}
+.game-nav{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:17px}
+.game-nav a{display:inline-block;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:800;color:#fff;background:#1769d3;box-shadow:0 5px 14px rgba(23,105,211,.18);transition:.18s}
+.game-nav a:nth-child(2){background:#7b55d9}
+.game-nav a:hover{transform:translateY(-3px);filter:brightness(1.08)}
+.game-label{display:inline-block;margin-bottom:8px;padding:5px 11px;border-radius:99px;background:#edf5ff;color:#1769d3;font-size:12px;font-weight:800}
+</style></head><body><header><div class="header"><div class="logo">AI <b>Learning</b> ป.6</div>
+<nav>
+<a href="index.html">หน้าแรก</a><a href="guide.html">คู่มือครู</a><a href="objectives.html">วัตถุประสงค์</a>
+<a href="pretest.html">Pre-test</a><a href="lesson.html">บทเรียน</a><a href="activity.html">กิจกรรม</a>
+<a href="posttest.html">Post-test</a><a href="summary.html">สรุป</a><a href="teacher.html">ครูผู้สอน</a>
+</nav></div></header><main><section class="activity-guide" aria-label="คำชี้แจงกิจกรรม">
+  <span class="game-label">🎮 AI LEARNING ป.6</span>
+  <h2>คำชี้แจงกิจกรรมการเรียนรู้</h2>
+  <p>หน้านี้ประกอบด้วย <strong>2 เกม</strong> เพื่อทบทวนความรู้เรื่องปัญญาประดิษฐ์ (AI) นักเรียนสามารถเลือกเล่นเกมที่ต้องการได้ โดยอ่านคำชี้แจงและกดปุ่มเพื่อไปยังเกมนั้น</p>
+  <p>🎯 <strong>เกมที่ 1:</strong> AI SHOOTER — ตอบคำถามเพื่อยิงศัตรูให้ครบ 15 Mission<br/>🌌 <strong>เกมที่ 2:</strong> Cyber World Adventure — วิ่ง กระโดด และตอบคำถาม AI ให้ครบ 10 ด่าน</p>
+  <div class="game-nav">
+    <a href="#game-one">🚀 ไปเกมที่ 1: AI SHOOTER</a>
+    <a href="#cyber-adventure-section">🌌 ไปเกมที่ 2: Cyber World</a>
+  </div>
+</section>
+<section class="page" id="game-one">
+<div class="title">
+  <h2>กิจกรรม : AI SHOOTER — พิชิตภารกิจ AI!</h2>
+  <p>ตอบถูกยิงศัตรู • ตอบผิดศัตรูเข้าใกล้ • พิชิตให้ครบทุก Mission</p>
+</div>
+
+<div class="game" style="padding:12px">
+  <div class="shooter-wrap">
+
+    <div class="shooter-hud">
+      <div class="shooter-stat"><small>❤️ พลังชีวิต</small><b id="hp">❤️❤️❤️</b></div>
+      <div class="shooter-stat"><small>⭐ คะแนน</small><b id="score">0</b></div>
+      <div class="shooter-stat"><small>🔥 COMBO</small><b id="combo">×0</b></div>
+      <div class="shooter-stat"><small>🎯 ภารกิจ</small><b id="count">1 / 15</b></div>
+    </div>
+
+    <div class="shooter-board">
+
+      <!-- ฝั่งซ้าย: สนามยิง -->
+      <div class="battle-zone" id="battleZone">
+        <div class="sun"></div>
+        <div class="cloud c1">☁️</div>
+        <div class="cloud c2">☁️</div>
+
+        <div class="battle-title">⚔️ BATTLE ZONE</div>
+
+        <div class="battle-distance">
+          <span id="distanceText">🛡️ ศัตรูอยู่ไกล</span>
+          <div><i id="distanceBar"></i></div>
+        </div>
+
+        <div class="city">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+        </div>
+
+        <div class="player" id="player">
+          <div class="player-head"><i></i><i></i></div>
+          <div class="player-body"></div>
+          <div class="player-gun"></div>
+          <strong>AI HERO</strong>
+        </div>
+
+        <div class="enemy" id="enemy">
+          <div class="enemy-hp">
+            <small>👾 AI MONSTER</small>
+            <div><i id="enemyBar"></i></div>
+          </div>
+          <div class="enemy-head"><i></i><i></i></div>
+          <div class="enemy-body"></div>
+          <strong id="enemyName">AI MONSTER</strong>
+        </div>
+
+        <div class="ground"></div>
+        <div class="battle-message" id="battleMessage"></div>
+      </div>
+
+      <!-- ฝั่งขวา: คำถาม -->
+      <div class="question-zone">
+
+        <div class="q-top">
+          <span class="mission-badge" id="mission">MISSION 01</span>
+          <span class="q-source">🧠 AI Learning ป.6</span>
+        </div>
+
+        <div class="mission-tip">
+          🎯 <b>ตอบถูก</b> = ยิงศัตรู &nbsp; | &nbsp;
+          ⚠️ <b>ตอบผิด</b> = ศัตรูเข้าใกล้
+        </div>
+
+        <div class="game-question" id="question">
+          กด “เริ่มภารกิจ” เพื่อเข้าสู่โลก AI
+        </div>
+
+        <div class="game-options" id="options"></div>
+
+        <div class="game-feedback" id="feedback"></div>
+
+      </div>
+
+      <!-- เริ่มเกม -->
+      <div class="shooter-modal" id="startModal">
+        <div class="shooter-modal-card">
+          <div class="modal-icon">🤖🔫</div>
+          <h2>AI SHOOTER</h2>
+          <p>
+            👾 AI MONSTER บุกเมืองแล้ว!<br>
+            ตอบคำถามให้ถูกเพื่อยิงศัตรู<br>
+            ตอบผิดเมื่อไร ศัตรูจะเข้ามาใกล้คุณ<br><br>
+            🏆 พิชิตให้ครบ 15 Mission
+          </p>
+          <button class="btn primary shooter-btn" id="startBtn">🚀 เริ่มภารกิจ</button>
+        </div>
+      </div>
+
+      <!-- จบเกม -->
+      <div class="shooter-modal hidden" id="endModal">
+        <div class="shooter-modal-card">
+          <div class="modal-icon" id="endIcon">🏆</div>
+          <h2 id="endTitle">AI MASTER!</h2>
+          <p id="endText"></p>
+          <button class="btn primary shooter-btn" id="againBtn">🔄 เล่นอีกครั้ง</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+<!-- เกมที่ 2: Cyber World Adventure เพิ่มต่อจากเกม AI SHOOTER เดิม -->
+<section class="page" id="cyber-adventure-section" style="margin-top:28px">
+  <div class="title">
+    <h2>กิจกรรมที่ 2 : Cyber World Adventure</h2>
+    <p>วิ่ง กระโดด เก็บเหรียญ และตอบคำถาม AI ให้ครบทั้ง 10 ด่าน</p>
+  </div>
+  <div class="game" style="padding:12px">
+    <iframe title="Cyber World Adventure เกมผจญภัย AI"
+      srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;th&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;Cyber World Adventure&lt;/title&gt;
+&lt;style&gt;
+@import url(&#x27;https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&amp;display=swap&#x27;);
+*{box-sizing:border-box}
+body{margin:0;background:#080b25;color:#fff;font-family:Kanit,sans-serif}
+.wrapper{width:min(1180px,96%);margin:auto;padding:18px 0 35px}
+header{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.logo h1{font-size:clamp(25px,4vw,44px);margin:0;color:#9af7ff;text-shadow:0 0 18px #42dff955}
+.logo p{margin:3px 0;color:#bdc9f5;font-size:14px}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{background:#151c4c;border:1px solid #3c4a91;border-radius:14px;padding:8px 15px;text-align:center}
+.stat b{display:block;color:#86efac;font-size:22px}.stat span{font-size:12px;color:#b9c4ed}
+.panel{margin-top:16px;background:#10173b;border:1px solid #394887;border-radius:24px;padding:16px;box-shadow:0 20px 55px #0006}
+canvas{display:block;width:100%;height:auto;border:3px solid #5367bd;border-radius:18px;background:#8edbff;image-rendering:auto}
+.toolbar{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:14px 0 0}
+button{font-family:inherit;font-size:16px;color:white;background:#5268ef;border:0;border-radius:12px;padding:10px 18px;cursor:pointer}
+button:hover{filter:brightness(1.15)}button:disabled{opacity:.5;cursor:not-allowed}
+.hint{text-align:center;color:#b9c4ed;font-size:13px;margin:9px 0 0}
+.box{margin-top:14px;padding:17px;background:#192452;border:1px solid #4b5da4;border-radius:17px}
+.hidden{display:none!important}
+.box h2{font-size:22px;color:#91f5ff;margin:0 0 8px}
+.question{font-size:18px;margin:0 0 13px}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.answers button{text-align:left;background:#2b3976;border:1px solid #5568ae}
+.answers button.correct{background:#126849;border-color:#6ff4ba}
+.answers button.wrong{background:#853e59;border-color:#ff9eb7}
+#feedback{color:#dbe4ff;min-height:26px;margin-top:12px}
+.screen{text-align:center;padding:35px 10px}
+.screen .emoji{font-size:70px}.screen h2{font-size:32px;color:#9af7ff;margin:5px}
+.screen p{color:#c5d0f2;max-width:620px;margin:12px auto}
+.screen ul{text-align:left;max-width:580px;margin:18px auto;color:#d9e2ff;line-height:1.9}
+@media(max-width:650px){.panel{padding:9px}.answers{grid-template-columns:1fr}.question{font-size:16px}}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;wrapper&quot;&gt;
+&lt;header&gt;
+  &lt;div class=&quot;logo&quot;&gt;&lt;h1&gt;🌌 Cyber World Adventure&lt;/h1&gt;&lt;p&gt;เกมผจญภัยแพลตฟอร์ม • ภารกิจพิชิตความรู้ AI • ป.6&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;stats&quot;&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;b id=&quot;score&quot;&gt;0&lt;/b&gt;&lt;span&gt;คะแนน&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;b id=&quot;level&quot;&gt;1/10&lt;/b&gt;&lt;span&gt;ด่าน&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;stat&quot;&gt;&lt;b id=&quot;hearts&quot;&gt;❤️❤️❤️&lt;/b&gt;&lt;span&gt;พลังชีวิต&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;section class=&quot;panel&quot;&gt;
+&lt;div id=&quot;start&quot; class=&quot;screen&quot;&gt;
+  &lt;div class=&quot;emoji&quot;&gt;🤖🌟👾&lt;/div&gt;
+  &lt;h2&gt;ภารกิจผู้พิทักษ์โลกไซเบอร์&lt;/h2&gt;
+  &lt;p&gt;วิ่ง กระโดด เก็บเหรียญ และกำจัดศัตรูดิจิทัล เพื่อปลดล็อกคำถาม AI ทั้ง 10 ด่าน&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;ใช้ A / D หรือปุ่มลูกศรเพื่อเคลื่อนที่&lt;/li&gt;
+    &lt;li&gt;กด W / ลูกศรขึ้น / Space เพื่อกระโดด&lt;/li&gt;
+    &lt;li&gt;กด X หรือปุ่มโจมตีเพื่อยิงพลังงาน&lt;/li&gt;
+    &lt;li&gt;ชนศัตรูด้วยการกระโดดใส่ หรือยิงพลังงาน&lt;/li&gt;
+    &lt;li&gt;เมื่อศัตรูถูกกำจัด ให้ตอบคำถามเพื่อผ่านด่าน&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;button id=&quot;startBtn&quot;&gt;🚀 เริ่มการผจญภัย&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;play&quot; class=&quot;hidden&quot;&gt;
+  &lt;canvas id=&quot;canvas&quot; width=&quot;1100&quot; height=&quot;520&quot;&gt;&lt;/canvas&gt;
+  &lt;div class=&quot;toolbar&quot;&gt;
+    &lt;button id=&quot;left&quot;&gt;◀&lt;/button&gt;&lt;button id=&quot;jump&quot;&gt;⬆ กระโดด&lt;/button&gt;&lt;button id=&quot;attack&quot;&gt;⚡ โจมตี&lt;/button&gt;&lt;button id=&quot;right&quot;&gt;▶&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;hint&quot;&gt;คีย์บอร์ด: A/D หรือ ◀/▶ เคลื่อนที่ • W/↑/Space กระโดด • X โจมตี&lt;/p&gt;
+  &lt;div id=&quot;questionBox&quot; class=&quot;box hidden&quot;&gt;
+    &lt;h2 id=&quot;qTitle&quot;&gt;ด่านที่ 1&lt;/h2&gt;
+    &lt;p class=&quot;question&quot; id=&quot;qText&quot;&gt;&lt;/p&gt;
+    &lt;div class=&quot;answers&quot; id=&quot;answers&quot;&gt;&lt;/div&gt;
+    &lt;div id=&quot;feedback&quot;&gt;&lt;/div&gt;
+    &lt;button id=&quot;next&quot; class=&quot;hidden&quot;&gt;ไปด่านถัดไป ➜&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;end&quot; class=&quot;screen hidden&quot;&gt;
+  &lt;div class=&quot;emoji&quot; id=&quot;endEmoji&quot;&gt;🏆&lt;/div&gt;
+  &lt;h2&gt;จบภารกิจ!&lt;/h2&gt;
+  &lt;p id=&quot;endText&quot;&gt;&lt;/p&gt;
+  &lt;button id=&quot;again&quot;&gt;เล่นอีกครั้ง ↻&lt;/button&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+const questions=[
+{q:&#x27;AI ย่อมาจากคำว่าอะไร?&#x27;,a:[&#x27;Automatic Internet&#x27;,&#x27;Artificial Intelligence&#x27;,&#x27;Advanced Input&#x27;,&#x27;Active Information&#x27;],c:1,e:&#x27;AI ย่อมาจาก Artificial Intelligence หรือปัญญาประดิษฐ์&#x27;},
+{q:&#x27;ข้อใดอธิบาย AI ได้เหมาะสมที่สุด?&#x27;,a:[&#x27;เครื่องใช้ไฟฟ้าทุกชนิด&#x27;,&#x27;ระบบที่วิเคราะห์หรือเรียนรู้จากข้อมูลได้&#x27;,&#x27;หุ่นยนต์ที่มีรูปร่างเหมือนคนเท่านั้น&#x27;,&#x27;เกมทุกชนิด&#x27;],c:1,e:&#x27;AI ช่วยให้ระบบทำงานบางอย่างที่เกี่ยวข้องกับการคิด วิเคราะห์ และเรียนรู้&#x27;},
+{q:&#x27;AI จำเป็นต้องมีรูปร่างเป็นหุ่นยนต์หรือไม่?&#x27;,a:[&#x27;จำเป็นเสมอ&#x27;,&#x27;ไม่จำเป็น อาจเป็นซอฟต์แวร์&#x27;,&#x27;ต้องมีแขนสองข้าง&#x27;,&#x27;ต้องเดินได้เท่านั้น&#x27;],c:1,e:&#x27;AI อาจอยู่ในโปรแกรม เช่น ระบบแนะนำเพลงหรือผู้ช่วยเสียง&#x27;},
+{q:&#x27;สิ่งใดเป็นข้อมูลที่ AI สามารถนำไปวิเคราะห์ได้?&#x27;,a:[&#x27;ภาพและข้อความ&#x27;,&#x27;เฉพาะก้อนหิน&#x27;,&#x27;เฉพาะโต๊ะไม้&#x27;,&#x27;ไม่มีข้อมูลใดเลย&#x27;],c:0,e:&#x27;AI สามารถใช้ข้อมูลหลายรูปแบบ เช่น ภาพ เสียง ข้อความ และตัวเลข&#x27;},
+{q:&#x27;Machine Learning คืออะไร?&#x27;,a:[&#x27;การซ่อมเครื่องจักร&#x27;,&#x27;การเรียนรู้จากข้อมูล&#x27;,&#x27;การวาดภาพด้วยมือ&#x27;,&#x27;การปิดระบบคอมพิวเตอร์&#x27;],c:1,e:&#x27;Machine Learning คือการเรียนรู้รูปแบบจากข้อมูลเพื่อใช้ทำงานหรือคาดการณ์&#x27;},
+{q:&#x27;ข้อใดเป็นตัวอย่าง AI ในชีวิตประจำวัน?&#x27;,a:[&#x27;ระบบแนะนำเพลง&#x27;,&#x27;ดินสอธรรมดา&#x27;,&#x27;สมุดเปล่า&#x27;,&#x27;โต๊ะไม้&#x27;],c:0,e:&#x27;ระบบแนะนำเพลงใช้ข้อมูลความสนใจของผู้ใช้เพื่อเสนอเพลงที่เหมาะสม&#x27;},
+{q:&#x27;ผู้ช่วยเสียงใช้ AI เพื่อทำสิ่งใด?&#x27;,a:[&#x27;รับคำสั่งและตอบสนอง&#x27;,&#x27;ทำให้อุปกรณ์หนักขึ้น&#x27;,&#x27;ลบไฟล์ทั้งหมด&#x27;,&#x27;ปิดอินเทอร์เน็ต&#x27;],c:0,e:&#x27;ผู้ช่วยเสียงใช้ AI ในการรับรู้ภาษาและตอบสนองคำสั่ง&#x27;},
+{q:&#x27;เมื่อ AI ให้คำตอบ เราควรทำอย่างไร?&#x27;,a:[&#x27;เชื่อทันที&#x27;,&#x27;ตรวจสอบข้อมูลก่อนใช้&#x27;,&#x27;แชร์ทันที&#x27;,&#x27;ไม่ต้องอ่าน&#x27;],c:1,e:&#x27;AI อาจให้ข้อมูลคลาดเคลื่อน จึงควรตรวจสอบกับแหล่งข้อมูลที่น่าเชื่อถือ&#x27;},
+{q:&#x27;ข้อใดเป็นการใช้ AI อย่างปลอดภัย?&#x27;,a:[&#x27;เผยแพร่รหัสผ่าน&#x27;,&#x27;ใส่ข้อมูลส่วนตัวสำคัญทุกครั้ง&#x27;,&#x27;ปกป้องข้อมูลส่วนตัวและตรวจสอบผลลัพธ์&#x27;,&#x27;ส่งข้อมูลทุกอย่างให้คนแปลกหน้า&#x27;],c:2,e:&#x27;ควรปกป้องข้อมูลส่วนตัวและใช้ AI อย่างมีความรับผิดชอบ&#x27;},
+{q:&#x27;หากพบภาพหรือเสียงที่อาจสร้างด้วย AI ควรทำอย่างไร?&#x27;,a:[&#x27;เชื่อทันที&#x27;,&#x27;ตรวจสอบแหล่งที่มาและเปรียบเทียบข้อมูล&#x27;,&#x27;แชร์ต่อโดยไม่อ่าน&#x27;,&#x27;ถือว่าเป็นความจริงเสมอ&#x27;],c:1,e:&#x27;ควรตรวจสอบแหล่งที่มาและเปรียบเทียบข้อมูลเพื่อระวังสื่อปลอม เช่น Deepfake&#x27;}
+];
+
+const canvas=document.getElementById(&#x27;canvas&#x27;),ctx=canvas.getContext(&#x27;2d&#x27;);
+const W=1100,H=520;
+let keys={},running=false,stage=0,score=0,hp=3,questionOpen=false,answered=false,enemyDefeated=false;
+let player,enemy,platforms,coins,shots,particles,camera=0,finishX=0,lastTime=0;
+const $=id=&gt;document.getElementById(id);
+function updateStats(){$(&#x27;score&#x27;).textContent=score;$(&#x27;level&#x27;).textContent=Math.min(stage+1,10)+&#x27;/10&#x27;;$(&#x27;hearts&#x27;).textContent=&#x27;❤️&#x27;.repeat(hp)+&#x27;🖤&#x27;.repeat(3-hp)}
+function resetLevel(){
+ player={x:75,y:350,w:42,h:58,vx:0,vy:0,onGround:false,dir:1,inv:0};
+ enemy={x:710,y:340,w:48,h:48,alive:true,hit:false};
+ platforms=[{x:0,y:455,w:1100,h:65},{x:170,y:365,w:160,h:20},{x:400,y:300,w:145,h:20},{x:620,y:390,w:170,h:20},{x:870,y:320,w:150,h:20}];
+ coins=[{x:220,y:325,taken:false},{x:275,y:325,taken:false},{x:445,y:260,taken:false},{x:500,y:260,taken:false},{x:675,y:350,taken:false},{x:940,y:280,taken:false}];
+ shots=[];particles=[];camera=0;finishX=1030;enemyDefeated=false;
+}
+function rectHit(a,b){return a.x&lt;b.x+b.w&amp;&amp;a.x+a.w&gt;b.x&amp;&amp;a.y&lt;b.y+b.h&amp;&amp;a.y+a.h&gt;b.y}
+function drawBackground(){
+ let g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,&#x27;#8ddfff&#x27;);g.addColorStop(1,&#x27;#d8f6ff&#x27;);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ ctx.fillStyle=&#x27;#ffffff88&#x27;;for(let i=0;i&lt;7;i++){let x=(i*210-camera*.15)%1250-100;ctx.beginPath();ctx.arc(x,90+(i%3)*38,28,0,Math.PI*2);ctx.arc(x+35,90+(i%3)*38,35,0,Math.PI*2);ctx.arc(x+70,100+(i%3)*38,25,0,Math.PI*2);ctx.fill()}
+ ctx.fillStyle=&#x27;#6cb9b2&#x27;;for(let i=0;i&lt;8;i++){let x=(i*180-camera*.3)%1250-120;ctx.beginPath();ctx.moveTo(x,455);ctx.lineTo(x+90,270);ctx.lineTo(x+180,455);ctx.fill()}
+}
+function drawPlatform(p){
+ ctx.fillStyle=&#x27;#284a86&#x27;;ctx.fillRect(p.x-camera,p.y,p.w,p.h);
+ ctx.fillStyle=&#x27;#72e1a4&#x27;;ctx.fillRect(p.x-camera,p.y,p.w,10);
+ ctx.fillStyle=&#x27;#3a65a5&#x27;;for(let x=p.x-camera+8;x&lt;p.x-camera+p.w-8;x+=35)ctx.fillRect(x,p.y+22,18,8);
+}
+function drawCoin(c){
+ if(c.taken)return;let x=c.x-camera,y=c.y;ctx.fillStyle=&#x27;#ffe27a&#x27;;ctx.beginPath();ctx.arc(x,y,13,0,Math.PI*2);ctx.fill();ctx.strokeStyle=&#x27;#e69b28&#x27;;ctx.lineWidth=4;ctx.stroke();ctx.fillStyle=&#x27;#fff3b0&#x27;;ctx.font=&#x27;14px sans-serif&#x27;;ctx.fillText(&#x27;★&#x27;,x-6,y+5)
+}
+function drawPlayer(){
+ let x=player.x-camera,y=player.y;ctx.save();ctx.translate(x,y);
+ ctx.fillStyle=&#x27;#1c2a5a&#x27;;ctx.fillRect(7,16,30,35);ctx.fillStyle=&#x27;#77e9ff&#x27;;ctx.fillRect(3,0,38,29);
+ ctx.fillStyle=&#x27;#132044&#x27;;ctx.fillRect(10,8,8,8);ctx.fillRect(27,8,8,8);
+ ctx.strokeStyle=&#x27;#a78bfa&#x27;;ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(4,28);ctx.lineTo(-9,43);ctx.moveTo(40,28);ctx.lineTo(52,43);ctx.stroke();
+ ctx.fillStyle=&#x27;#536dff&#x27;;ctx.fillRect(8,51,10,7);ctx.fillRect(28,51,10,7);
+ ctx.strokeStyle=&#x27;#f0abfc&#x27;;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(22,0);ctx.lineTo(22,-12);ctx.stroke();ctx.fillStyle=&#x27;#f0abfc&#x27;;ctx.beginPath();ctx.arc(22,-15,4,0,Math.PI*2);ctx.fill();
+ ctx.restore()
+}
+function drawEnemy(){
+ if(!enemy.alive)return;let x=enemy.x-camera,y=enemy.y;ctx.save();ctx.translate(x,y);
+ ctx.fillStyle=&#x27;#b44df0&#x27;;ctx.fillRect(0,8,48,40);ctx.fillStyle=&#x27;#452080&#x27;;ctx.fillRect(7,17,34,18);
+ ctx.fillStyle=&#x27;#ffe27a&#x27;;ctx.fillRect(12,23,7,7);ctx.fillRect(29,23,7,7);
+ ctx.strokeStyle=&#x27;#f472b6&#x27;;ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(5,14);ctx.lineTo(-10,0);ctx.moveTo(43,14);ctx.lineTo(58,0);ctx.stroke();
+ ctx.fillStyle=&#x27;#5b2c85&#x27;;ctx.fillRect(8,48,9,8);ctx.fillRect(31,48,9,8);
+ ctx.restore()
+}
+function drawShot(s){ctx.fillStyle=&#x27;#fff18a&#x27;;ctx.shadowBlur=16;ctx.shadowColor=&#x27;#fff18a&#x27;;ctx.fillRect(s.x-camera,s.y,22,8);ctx.shadowBlur=0}
+function draw(){
+ drawBackground();platforms.forEach(drawPlatform);coins.forEach(drawCoin);
+ ctx.fillStyle=&#x27;#fff&#x27;;ctx.font=&#x27;18px Kanit&#x27;;ctx.fillText(&#x27;WORLD &#x27;+(stage+1)+&#x27;  •  CYBER ZONE&#x27;,22,32);
+ ctx.fillStyle=&#x27;#25356c&#x27;;ctx.fillRect(1010-camera,360,28,95);ctx.fillStyle=&#x27;#7cf7c6&#x27;;ctx.fillRect(1018-camera,372,12,83);
+ shots.forEach(drawShot);drawEnemy();drawPlayer();
+ if(player.x&gt;650)camera=Math.min(180,player.x-650);
+}
+function move(dt){
+ if(questionOpen)return;
+ let left=keys.ArrowLeft||keys.a,right=keys.ArrowRight||keys.d;
+ player.vx=0;if(left){player.vx=-220;player.dir=-1}if(right){player.vx=220;player.dir=1}
+ player.x+=player.vx*dt;player.x=Math.max(0,Math.min(1040,player.x));
+ player.vy+=950*dt;let oldY=player.y;player.y+=player.vy*dt;player.onGround=false;
+ for(const p of platforms){if(player.x+player.w&gt;p.x&amp;&amp;player.x&lt;p.x+p.w&amp;&amp;oldY+player.h&lt;=p.y&amp;&amp;player.y+player.h&gt;=p.y&amp;&amp;player.vy&gt;=0){player.y=p.y-player.h;player.vy=0;player.onGround=true}}
+ if(player.y&gt;H+30){hurt();return}
+ if(enemy.alive&amp;&amp;rectHit(player,enemy)){
+   if(player.vy&gt;0&amp;&amp;player.y+player.h-enemy.y&lt;25){enemy.alive=false;enemyDefeated=true;player.vy=-430;burst(enemy.x,enemy.y);openQuestion()}
+   else if(player.inv&lt;=0)hurt()
+ }
+ coins.forEach(c=&gt;{if(!c.taken&amp;&amp;Math.abs(player.x+20-c.x)&lt;28&amp;&amp;Math.abs(player.y+25-c.y)&lt;35){c.taken=true;score+=2;updateStats()}})
+ shots.forEach(s=&gt;s.x+=s.vx*dt);shots=shots.filter(s=&gt;s.x&lt;1200&amp;&amp;s.x&gt;-100);
+ if(enemy.alive)for(const s of shots){if(s.x&lt;enemy.x+enemy.w&amp;&amp;s.x+22&gt;enemy.x&amp;&amp;s.y&lt;enemy.y+enemy.h&amp;&amp;s.y+8&gt;enemy.y){enemy.alive=false;enemyDefeated=true;burst(enemy.x,enemy.y);openQuestion()}}
+ if(player.inv&gt;0)player.inv-=dt;
+}
+function burst(x,y){for(let i=0;i&lt;16;i++)particles.push({x,y,vx:(Math.random()-.5)*260,vy:(Math.random()-.5)*260,life:1})}
+function drawParticles(dt){particles.forEach(p=&gt;{p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt;ctx.fillStyle=&#x27;#fef08a&#x27;;ctx.fillRect(p.x-camera,p.y,6,6)});particles=particles.filter(p=&gt;p.life&gt;0)}
+function hurt(){if(player.inv&gt;0)return;hp--;player.inv=1.2;player.x=75;player.y=300;player.vy=0;updateStats();if(hp&lt;=0)endGame()}
+function jump(){if(running&amp;&amp;!questionOpen&amp;&amp;player.onGround){player.vy=-520;player.onGround=false}}
+function attack(){if(running&amp;&amp;!questionOpen)shots.push({x:player.x+(player.dir&gt;0?45:-25),y:player.y+24,vx:player.dir*600})}
+function openQuestion(){
+ questionOpen=true;$(&#x27;questionBox&#x27;).classList.remove(&#x27;hidden&#x27;);$(&#x27;qTitle&#x27;).textContent=&#x27;⚔️ ศัตรูถูกกำจัด! ด่าน &#x27;+(stage+1)+&#x27;/10&#x27;;
+ $(&#x27;qText&#x27;).textContent=questions[stage].q;$(&#x27;feedback&#x27;).textContent=&#x27;ตอบคำถามให้ถูกต้องเพื่อปลดล็อกทางไปต่อ&#x27;;$(&#x27;next&#x27;).classList.add(&#x27;hidden&#x27;);$(&#x27;answers&#x27;).innerHTML=&#x27;&#x27;;answered=false;
+ questions[stage].a.forEach((a,i)=&gt;{let b=document.createElement(&#x27;button&#x27;);b.textContent=String.fromCharCode(65+i)+&#x27;. &#x27;+a;b.onclick=()=&gt;answer(i,b);$(&#x27;answers&#x27;).appendChild(b)})
+}
+function answer(i,b){
+ if(answered)return;answered=true;let q=questions[stage],bs=[...$(&#x27;answers&#x27;).children];bs.forEach(x=&gt;x.disabled=true);
+ if(i===q.c){score+=10;b.classList.add(&#x27;correct&#x27;);$(&#x27;feedback&#x27;).textContent=&#x27;✅ ถูกต้อง! &#x27;+q.e}
+ else{hp--;b.classList.add(&#x27;wrong&#x27;);bs[q.c].classList.add(&#x27;correct&#x27;);$(&#x27;feedback&#x27;).textContent=&#x27;❌ คำตอบที่ถูกคือ: &#x27;+q.a[q.c]+&#x27; — &#x27;+q.e}
+ updateStats();$(&#x27;next&#x27;).classList.remove(&#x27;hidden&#x27;);
+}
+function nextLevel(){stage++;if(stage&gt;=10||hp&lt;=0){endGame();return}resetLevel();questionOpen=false;$(&#x27;questionBox&#x27;).classList.add(&#x27;hidden&#x27;);updateStats()}
+function endGame(){running=false;$(&#x27;play&#x27;).classList.add(&#x27;hidden&#x27;);$(&#x27;start&#x27;).classList.add(&#x27;hidden&#x27;);$(&#x27;end&#x27;).classList.remove(&#x27;hidden&#x27;);$(&#x27;endEmoji&#x27;).textContent=score&gt;=80?&#x27;🏆&#x27;:score&gt;=50?&#x27;🌟&#x27;:&#x27;🎓&#x27;;$(&#x27;endText&#x27;).textContent=&#x27;คุณทำคะแนนได้ &#x27;+score+&#x27; คะแนน จากคะแนนเต็ม 120 คะแนน และผ่านไป &#x27;+stage+&#x27; ด่าน&#x27;;}
+function start(){running=true;stage=0;score=0;hp=3;resetLevel();updateStats();$(&#x27;start&#x27;).classList.add(&#x27;hidden&#x27;);$(&#x27;end&#x27;).classList.add(&#x27;hidden&#x27;);$(&#x27;play&#x27;).classList.remove(&#x27;hidden&#x27;);}
+function loop(t){let dt=Math.min((t-lastTime)/1000||0,.033);lastTime=t;if(running){move(dt);drawParticles(dt);draw()}requestAnimationFrame(loop)}
+$(&#x27;startBtn&#x27;).onclick=start;$(&#x27;again&#x27;).onclick=start;$(&#x27;next&#x27;).onclick=nextLevel;
+$(&#x27;attack&#x27;).onclick=attack;$(&#x27;jump&#x27;).onclick=jump;
+$(&#x27;left&#x27;).onpointerdown=()=&gt;keys.ArrowLeft=true;$(&#x27;left&#x27;).onpointerup=()=&gt;keys.ArrowLeft=false;$(&#x27;left&#x27;).onpointerleave=()=&gt;keys.ArrowLeft=false;
+$(&#x27;right&#x27;).onpointerdown=()=&gt;keys.ArrowRight=true;$(&#x27;right&#x27;).onpointerup=()=&gt;keys.ArrowRight=false;$(&#x27;right&#x27;).onpointerleave=()=&gt;keys.ArrowRight=false;
+window.addEventListener(&#x27;keydown&#x27;,e=&gt;{keys[e.key]=true;if([&#x27; &#x27;,&#x27;ArrowUp&#x27;,&#x27;w&#x27;].includes(e.key))jump();if(e.key.toLowerCase()===&#x27;x&#x27;)attack()});
+window.addEventListener(&#x27;keyup&#x27;,e=&gt;keys[e.key]=false);
+resetLevel();draw();requestAnimationFrame(loop);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"
+      style="display:block;width:100%;height:1100px;border:0;border-radius:18px;background:#080b25"
+      loading="lazy"></iframe>
+  </div>
+</section>
+</main>
+
+<div class="bottom-nav"><div class="bottom-inner">
+  <a class="bottom-btn" href="lesson.html">← ย้อนกลับ</a>
+  <div class="bottom-center">หน้า 6 / 9</div>
+  <a class="bottom-btn next" href="posttest.html">ถัดไป →</a>
+</div></div>
+
+<footer>AI Learning ป.6 · เว็บไซต์สื่อการเรียนรู้เรื่องปัญญาประดิษฐ์ (AI)</footer>
+<script>
+const questions=[
+{
+q:"📱 เพื่อนเปิดโทรศัพท์ แล้วเครื่องจำใบหน้าของเพื่อนได้ทันที คุณคิดว่าระบบกำลังใช้เทคโนโลยีอะไร?",
+o:["AI","ไม้บรรทัด","เครื่องพิมพ์","ลำโพงธรรมดา"],a:0,e:"ระบบจดจำใบหน้าเป็นหนึ่งในการประยุกต์ใช้ AI"
+},
+{
+q:"🎙️ คุณพูดว่า “เปิดเพลงให้หน่อย” แล้วผู้ช่วยในโทรศัพท์เข้าใจคำสั่งของคุณ ระบบกำลังประมวลผลอะไร?",
+o:["เสียงและคำสั่ง","สีโทรศัพท์","น้ำหนักโทรศัพท์","ขนาดหน้าจอ"],a:0,e:"ผู้ช่วยเสียงสามารถใช้ AI เพื่อรับรู้และประมวลผลคำสั่ง"
+},
+{
+q:"🤖 หุ่นยนต์พบสิ่งกีดขวางข้างหน้า แล้วต้องเลือกว่าจะเดินซ้ายหรือขวา อะไรช่วยในการตัดสินใจ?",
+o:["สีของหุ่นยนต์","ระบบ AI","ล้ออย่างเดียว","แบตเตอรี่"],a:1,e:"AI สามารถช่วยวิเคราะห์ข้อมูลและสนับสนุนการตัดสินใจ"
+},
+{
+q:"🧠 ครูให้ AI ดูภาพแมวจำนวนมาก เพื่อให้ระบบเรียนรู้ลักษณะของแมว สิ่งใดสำคัญมากในการเรียนรู้ครั้งนี้?",
+o:["ข้อมูล","สีหน้าจอ","เสียงลำโพง","ความเร็วเมาส์"],a:0,e:"ข้อมูลเป็นพื้นฐานสำคัญของการเรียนรู้ของ AI"
+},
+{
+q:"🎧 คุณฟังเพลงแนวเดิมบ่อย ๆ แล้วแอปเริ่มแนะนำเพลงคล้ายกัน ระบบกำลังทำอะไร?",
+o:["วิเคราะห์ความสนใจของผู้ใช้","เปลี่ยนโทรศัพท์","เพิ่มเสียงลำโพง","ดาวน์โหลดทุกเพลง"],a:0,e:"AI สามารถวิเคราะห์พฤติกรรมเพื่อช่วยแนะนำเนื้อหาที่ผู้ใช้อาจสนใจ"
+},
+{
+q:"🍿 คุณดูหนังผจญภัยหลายเรื่อง แล้วระบบแนะนำหนังแนวเดียวกัน ทำไมระบบจึงทำแบบนั้นได้?",
+o:["วิเคราะห์พฤติกรรมของผู้ใช้","สุ่มหนังทุกครั้ง","ดูหนังแทนคุณ","อ่านใจคุณ"],a:0,e:"ระบบสามารถใช้ข้อมูลการใช้งานเพื่อสร้างคำแนะนำ"
+},
+{
+q:"📚 คุณไม่เข้าใจบทเรียน จึงให้ AI ช่วยอธิบาย แล้วนำคำอธิบายมาศึกษาต่อด้วยตัวเอง แบบนี้เป็นการใช้ AI อย่างไร?",
+o:["ใช้ AI เป็นผู้ช่วยเรียนรู้","ให้ AI ทำทุกอย่าง","คัดลอกคำตอบทั้งหมด","ไม่ต้องเรียนเอง"],a:0,e:"AI สามารถเป็นเครื่องมือช่วยเรียนรู้ได้ แต่ผู้เรียนยังควรคิดและตรวจสอบด้วยตนเอง"
+},
+{
+q:"🚨 AI บอกตัวเลขหนึ่งให้คุณ แต่ตัวเลขดูแปลกมาก คุณควรทำอย่างไรเพื่อไม่ให้โดนกับดักของ AI?",
+o:["เชื่อทันที","แชร์ให้เพื่อน","ตรวจสอบกับแหล่งข้อมูลที่น่าเชื่อถือ","ถาม AI ซ้ำเท่านั้น"],a:2,e:"ข้อมูลจาก AI อาจผิดพลาด จึงควรตรวจสอบกับแหล่งข้อมูลที่น่าเชื่อถือ"
+},
+{
+q:"👻 AI ตอบคำถามอย่างมั่นใจ แต่เมื่อค้นต่อกลับไม่พบข้อมูลนั้น คุณคิดว่าเกิดอะไรขึ้น?",
+o:["AI อาจสร้างข้อมูลที่ไม่ถูกต้อง","อินเทอร์เน็ตเสียแน่นอน","คอมพิวเตอร์ไม่มีไฟ","ผู้ใช้พูดดังเกินไป"],a:0,e:"AI อาจสร้างคำตอบที่ดูน่าเชื่อถือแต่ไม่ตรงกับข้อเท็จจริง"
+},
+{
+q:"🎭 คุณได้รับคลิปคนดังพูดเรื่องแปลก ๆ แต่ไม่แน่ใจว่าเป็นคลิปจริง ก่อนแชร์ควรทำอะไร?",
+o:["แชร์ทันที","ตรวจสอบแหล่งที่มา","ส่งเข้าทุกกลุ่ม","เชื่อเพราะเป็นวิดีโอ"],a:1,e:"ควรตรวจสอบแหล่งที่มาก่อนเชื่อหรือเผยแพร่"
+},
+{
+q:"👤 ในคลิปมีการใช้ใบหน้าและเสียงของคนหนึ่งให้ดูเหมือนพูดสิ่งที่ไม่เคยพูด เทคโนโลยีนี้อาจเรียกว่าอะไร?",
+o:["Deepfake","GPS","เครื่องคิดเลข","เครื่องพิมพ์"],a:0,e:"Deepfake สามารถใช้ AI สร้างหรือดัดแปลงภาพ เสียง และวิดีโอ"
+},
+{
+q:"🚗 รถอัจฉริยะพบรถอีกคันอยู่ข้างหน้า ระบบควรนำข้อมูลนี้ไปใช้ทำอะไร?",
+o:["วิเคราะห์สถานการณ์เพื่อช่วยตัดสินใจ","เปลี่ยนสีรถ","เปิดเพลงดังขึ้น","ปิดหน้าจอ"],a:0,e:"AI สามารถช่วยวิเคราะห์ข้อมูลจากสภาพแวดล้อม"
+},
+{
+q:"🏠 บ้านอัจฉริยะเรียนรู้ว่าคุณมักเปิดไฟเวลาเดิมทุกคืน แล้วช่วยควบคุมไฟอัตโนมัติ สิ่งนี้สะท้อนการใช้งานอะไร?",
+o:["เทคโนโลยีอัจฉริยะ","สมุดอัจฉริยะ","เครื่องพิมพ์","อินเทอร์เน็ตอย่างเดียว"],a:0,e:"ระบบอัจฉริยะสามารถนำข้อมูลพฤติกรรมมาใช้ช่วยควบคุมอุปกรณ์"
+},
+{
+q:"🧐 คุณเห็นคำตอบจาก AI ที่ดูดีมาก แต่ไม่มีแหล่งอ้างอิง คุณควรใช้วิธีไหน?",
+o:["เชื่อทันที","แชร์ทันที","ตรวจสอบข้อมูลเพิ่มเติม","ถือว่า AI ถูกเสมอ"],a:2,e:"ควรตรวจสอบข้อมูลก่อนนำไปใช้หรือเผยแพร่"
+},
+{
+q:"👑 FINAL BOSS! AI บอกข้อมูลที่ดูน่าเชื่อถือมาก แต่คุณไม่รู้ว่าจริงหรือไม่ คุณจะใช้ท่าไม้ตายอะไร?",
+o:["เชื่อ AI เพราะ AI ฉลาด","แชร์ข้อมูลทันที","ตรวจสอบข้อมูลและใช้วิจารณญาณ","ให้คนอื่นตัดสินใจแทน"],a:2,e:"การใช้ AI อย่างรับผิดชอบต้องตรวจสอบข้อมูลและใช้วิจารณญาณ"
+}
+];
+
+let current=0,score=0,hp=3,combo=0,distance=100,enemyHP=100,locked=true,running=false;
+
+const battle=document.getElementById("battleZone");
+const player=document.getElementById("player");
+const enemy=document.getElementById("enemy");
+const hpEl=document.getElementById("hp");
+const scoreEl=document.getElementById("score");
+const comboEl=document.getElementById("combo");
+const countEl=document.getElementById("count");
+const missionEl=document.getElementById("mission");
+const questionEl=document.getElementById("question");
+const optionsEl=document.getElementById("options");
+const feedbackEl=document.getElementById("feedback");
+const distanceBar=document.getElementById("distanceBar");
+const distanceText=document.getElementById("distanceText");
+const enemyBar=document.getElementById("enemyBar");
+const enemyName=document.getElementById("enemyName");
+const battleMessage=document.getElementById("battleMessage");
+const startModal=document.getElementById("startModal");
+const endModal=document.getElementById("endModal");
+const endIcon=document.getElementById("endIcon");
+const endTitle=document.getElementById("endTitle");
+const endText=document.getElementById("endText");
+
+function update(){
+  hpEl.textContent="❤️".repeat(hp)+"🖤".repeat(3-hp);
+  scoreEl.textContent=score;
+  comboEl.textContent="×"+combo;
+  countEl.textContent=Math.min(current+1,questions.length)+" / "+questions.length;
+  enemyBar.style.width=enemyHP+"%";
+  distanceBar.style.width=distance+"%";
+
+  const right=7+((100-distance)*.42);
+  enemy.style.right=right+"%";
+
+  if(distance>65) distanceText.textContent="🛡️ ศัตรูอยู่ไกล";
+  else if(distance>35) distanceText.textContent="⚠️ ศัตรูกำลังเข้าใกล้";
+  else distanceText.textContent="🚨 อันตราย! ศัตรูใกล้มาก";
+}
+
+function loadQuestion(){
+  if(current>=questions.length){winGame();return;}
+
+  locked=false;
+  const q=questions[current];
+
+  missionEl.textContent="MISSION "+String(current+1).padStart(2,"0");
+  questionEl.textContent=q.q;
+  optionsEl.innerHTML="";
+  feedbackEl.textContent="";
+
+  if(current===questions.length-1){
+    enemy.classList.add("boss");
+    enemyName.textContent="👑 AI BOSS";
+  }else{
+    enemy.classList.remove("boss");
+    enemyName.textContent="AI MONSTER";
+  }
+
+  q.o.forEach((text,i)=>{
+    const btn=document.createElement("button");
+    btn.className="game-option";
+    btn.type="button";
+    btn.textContent=String.fromCharCode(65+i)+". "+text;
+    btn.onclick=()=>answer(i,btn);
+    optionsEl.appendChild(btn);
+  });
+
+  update();
+}
+
+function answer(index,button){
+  if(locked||!running)return;
+  locked=true;
+
+  const q=questions[current];
+  const buttons=optionsEl.querySelectorAll(".game-option");
+  buttons.forEach(b=>b.disabled=true);
+
+  if(index===q.a){
+    button.classList.add("correct");
+    combo++;
+    const points=100+(combo*25);
+    score+=points;
+    enemyHP=0;
+
+    shoot();
+    showMessage(combo>=3?"⚡ SUPER SHOT!":"🎯 HIT!");
+
+    feedbackEl.textContent="🎯 ยิงโดน! +"+points+" คะแนน";
+    feedbackEl.style.color="#15945d";
+    update();
+
+    setTimeout(()=>{
+      current++;
+      enemyHP=100;
+      distance=Math.min(100,distance+8);
+
+      if(current>=questions.length)winGame();
+      else loadQuestion();
+    },950);
+
+  }else{
+    button.classList.add("wrong");
+    combo=0;
+    distance=Math.max(0,distance-25);
+
+    feedbackEl.textContent="❌ พลาด! "+q.e;
+    feedbackEl.style.color="#a33445";
+
+    enemy.classList.add("shake");
+    setTimeout(()=>enemy.classList.remove("shake"),350);
+
+    if(distance<=10){
+      hp--;
+      distance=65;
+      player.classList.add("shake");
+      showMessage("💔 ถูกโจมตี! HP -1");
+      setTimeout(()=>player.classList.remove("shake"),400);
+
+      if(hp<=0){
+        update();
+        setTimeout(gameOver,450);
+        return;
+      }
+    }else{
+      showMessage("⚠️ ศัตรูเข้าใกล้!");
+    }
+
+    update();
+
+    setTimeout(()=>{
+      current++;
+      enemyHP=100;
+
+      if(current>=questions.length)winGame();
+      else loadQuestion();
+    },1500);
+  }
+}
+
+function shoot(){
+  const br=battle.getBoundingClientRect();
+  const pr=player.getBoundingClientRect();
+  const er=enemy.getBoundingClientRect();
+
+  const bullet=document.createElement("div");
+  bullet.className="bullet";
+
+  const sx=pr.right-br.left-3;
+  const sy=pr.top-br.top+70;
+  const tx=er.left-br.left;
+  const ty=er.top-br.top+70;
+
+  bullet.style.left=sx+"px";
+  bullet.style.top=sy+"px";
+  battle.appendChild(bullet);
+
+  const dx=tx-sx,dy=ty-sy;
+
+  bullet.animate(
+    [
+      {transform:"translate(0,0)"},
+      {transform:`translate(${dx}px,${dy}px)`}
+    ],
+    {duration:430,easing:"ease-out"}
+  );
+
+  setTimeout(()=>{
+    bullet.remove();
+
+    const boom=document.createElement("div");
+    boom.className="explosion";
+    boom.textContent="💥";
+    boom.style.left=(tx-25)+"px";
+    boom.style.top=(ty-30)+"px";
+    battle.appendChild(boom);
+
+    setTimeout(()=>boom.remove(),650);
+  },430);
+}
+
+function showMessage(text){
+  battleMessage.textContent=text;
+  battleMessage.classList.remove("show");
+  void battleMessage.offsetWidth;
+  battleMessage.classList.add("show");
+}
+
+function startGame(){
+  current=0;
+  score=0;
+  hp=3;
+  combo=0;
+  distance=100;
+  enemyHP=100;
+  locked=false;
+  running=true;
+
+  startModal.classList.add("hidden");
+  endModal.classList.add("hidden");
+  loadQuestion();
+}
+
+function gameOver(){
+  running=false;
+  locked=true;
+  endIcon.textContent="💥";
+  endTitle.textContent="GAME OVER";
+  endText.innerHTML="👾 AI MONSTER เข้าถึงตัวคุณแล้ว!<br><br>⭐ คะแนนของคุณ <strong>"+score+"</strong> คะแนน";
+  endModal.classList.remove("hidden");
+}
+
+function winGame(){
+  running=false;
+  locked=true;
+  endIcon.textContent="🏆";
+  endTitle.textContent="AI MASTER!";
+  endText.innerHTML="🎉 คุณพิชิตภารกิจ AI สำเร็จ!<br><br>⭐ คะแนนรวม <strong>"+score+"</strong> คะแนน";
+  endModal.classList.remove("hidden");
+}
+
+document.getElementById("startBtn").onclick=startGame;
+document.getElementById("againBtn").onclick=startGame;
+
+document.addEventListener("keydown",e=>{
+  if(!running||locked)return;
+  if(e.key>="1"&&e.key<="4"){
+    const btn=optionsEl.querySelectorAll(".game-option")[Number(e.key)-1];
+    if(btn)btn.click();
+  }
+});
+
+update();
+</script></body></html>

@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Learning ป.6 | ครูผู้สอน</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700;800&display=swap');
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  font-family:Anuphan,Arial,sans-serif;
+  color:#173b70;
+}
+
+body{
+  min-height:100vh;
+  background:
+    linear-gradient(180deg,#eef8ff 0%,#f8fbff 55%,#ffffff 100%);
+}
+
+/* ================= HEADER ================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid #dce8f7;
+  box-shadow:0 3px 18px rgba(39,92,150,.10);
+}
+
+.header{
+  max-width:1180px;
+  min-height:66px;
+  margin:auto;
+  padding:10px 18px;
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:800;
+  color:#1769d3;
+  white-space:nowrap;
+}
+
+.logo b{
+  color:#e64c91;
+}
+
+nav{
+  display:flex;
+  gap:3px;
+  flex:1;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+nav::-webkit-scrollbar{
+  display:none;
+}
+
+nav a{
+  padding:9px 10px;
+  border-radius:10px;
+  text-decoration:none;
+  color:#5b708d;
+  font-size:13px;
+  font-weight:700;
+  white-space:nowrap;
+  transition:.2s;
+}
+
+nav a:hover{
+  color:#1769d3;
+  background:#edf5ff;
+}
+
+nav a.active{
+  color:#1769d3;
+  background:#e7f3ff;
+}
+
+/* ================= MAIN ================= */
+
+main{
+  max-width:1180px;
+  margin:auto;
+  padding:34px 18px 120px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:26px;
+}
+
+.title h2{
+  margin:0;
+  color:#173f80;
+  font-size:clamp(30px,4vw,44px);
+  font-weight:800;
+}
+
+.title p{
+  margin:7px 0 0;
+  color:#6b7f9b;
+  font-size:16px;
+}
+
+/* ================= IMAGE SLIDE ================= */
+
+.slide-wrap{
+  width:100%;
+  max-width:1080px;
+  margin:auto;
+  position:relative;
+}
+
+.slide-card{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  padding:10px;
+  overflow:hidden;
+  border-radius:30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.98),
+      rgba(236,248,255,.96)
+    );
+
+  border:2px solid rgba(255,255,255,.95);
+
+  box-shadow:
+    0 25px 70px rgba(46,106,168,.18),
+    0 5px 20px rgba(46,106,168,.10);
+}
+
+/* เส้นขอบเรืองแสง */
+
+.slide-card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:32px;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 15%,
+      rgba(90,180,255,.45),
+      transparent 35%,
+      transparent 65%,
+      rgba(255,110,180,.35),
+      transparent 85%
+    );
+
+  z-index:0;
+  animation:borderMove 5s linear infinite;
+}
+
+@keyframes borderMove{
+  0%{
+    transform:translateX(-30%);
+  }
+  100%{
+    transform:translateX(30%);
+  }
+}
+
+.image-box{
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  border-radius:22px;
+  background:#eaf6ff;
+}
+
+/* ภาพใหม่ */
+
+.image-box img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+
+  animation:imageFloat 5s ease-in-out infinite;
+}
+
+@keyframes imageFloat{
+  0%,100%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.012);
+  }
+}
+
+/* แสงวิ่งผ่านภาพ */
+
+.shine{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.shine::after{
+  content:"";
+  position:absolute;
+  width:22%;
+  height:170%;
+  top:-35%;
+  left:-35%;
+
+  transform:rotate(22deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.55),
+      transparent
+    );
+
+  animation:imageShine 5.5s ease-in-out infinite;
+}
+
+@keyframes imageShine{
+
+  0%,45%{
+    left:-35%;
+  }
+
+  75%,100%{
+    left:125%;
+  }
+}
+
+/* ================= ROBOT ================= */
+
+.robot{
+  position:absolute;
+  z-index:10;
+
+  right:35px;
+  bottom:28px;
+
+  width:125px;
+  height:155px;
+
+  animation:
+    robotJump 1.7s ease-in-out infinite;
+
+  filter:
+    drop-shadow(
+      0 12px 12px
+      rgba(25,82,140,.22)
+    );
+}
+
+/* หัว */
+
+.robot-head{
+  position:absolute;
+
+  left:22px;
+  bottom:75px;
+
+  width:82px;
+  height:64px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #dff1ff
+    );
+
+  border:3px solid #559de7;
+  border-radius:23px;
+}
+
+/* หู */
+
+.robot-ear{
+  position:absolute;
+  top:19px;
+
+  width:12px;
+  height:25px;
+
+  background:#8bc4f3;
+  border:2px solid #559de7;
+
+  border-radius:8px;
+}
+
+.robot-ear.left{
+  left:-11px;
+}
+
+.robot-ear.right{
+  right:-11px;
+}
+
+/* ตา */
+
+.eye{
+  position:absolute;
+  top:21px;
+
+  width:12px;
+  height:16px;
+
+  border-radius:50%;
+  background:#1769d3;
+
+  animation:blink 4s infinite;
+}
+
+.eye.left{
+  left:19px;
+}
+
+.eye.right{
+  right:19px;
+}
+
+@keyframes blink{
+
+  0%,45%,50%,100%{
+    transform:scaleY(1);
+  }
+
+  47%{
+    transform:scaleY(.08);
+  }
+}
+
+/* ปาก */
+
+.smile{
+  position:absolute;
+
+  left:25px;
+  bottom:10px;
+
+  width:28px;
+  height:15px;
+
+  border-bottom:
+    4px solid #ed5f9d;
+
+  border-radius:
+    0 0 20px 20px;
+}
+
+/* เสาอากาศ */
+
+.antenna{
+  position:absolute;
+
+  width:4px;
+  height:19px;
+
+  left:39px;
+  top:-21px;
+
+  background:#559de7;
+}
+
+.antenna-dot{
+  position:absolute;
+
+  width:12px;
+  height:12px;
+
+  left:-4px;
+  top:-10px;
+
+  border-radius:50%;
+
+  background:#ffc64d;
+
+  box-shadow:
+    0 0 14px
+    rgba(255,198,77,.8);
+
+  animation:
+    antennaPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes antennaPulse{
+
+  from{
+    transform:scale(.75);
+  }
+
+  to{
+    transform:scale(1.15);
+  }
+}
+
+/* ตัว */
+
+.robot-body{
+  position:absolute;
+
+  left:27px;
+  bottom:17px;
+
+  width:72px;
+  height:66px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #dceeff
+    );
+
+  border:
+    3px solid #559de7;
+
+  border-radius:20px;
+}
+
+/* จอหน้าอก */
+
+.robot-body::before{
+  content:"AI";
+
+  position:absolute;
+
+  left:18px;
+  top:16px;
+
+  width:30px;
+  height:22px;
+
+  display:grid;
+  place-items:center;
+
+  background:#bde3ff;
+  border:2px solid #79b6ec;
+
+  border-radius:8px;
+
+  color:#1769d3;
+  font-size:11px;
+  font-weight:800;
+}
+
+/* หัวใจ */
+
+.robot-body::after{
+  content:"♥";
+
+  position:absolute;
+
+  right:8px;
+  bottom:8px;
+
+  color:#ed609d;
+  font-size:14px;
+
+  animation:heartBeat 1s infinite;
+}
+
+@keyframes heartBeat{
+
+  0%,100%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.25);
+  }
+}
+
+/* แขน */
+
+.arm{
+  position:absolute;
+
+  bottom:25px;
+
+  width:16px;
+  height:49px;
+
+  background:#dceeff;
+
+  border:
+    3px solid #559de7;
+
+  border-radius:12px;
+
+  transform-origin:
+    top center;
+}
+
+/* แขนซ้าย */
+
+.arm.left{
+  left:9px;
+  transform:rotate(22deg);
+}
+
+/* แขนขวาโบกมือ */
+
+.arm.right{
+  right:7px;
+
+  transform:rotate(-48deg);
+
+  animation:
+    wave 0.65s ease-in-out
+    infinite alternate;
+}
+
+@keyframes wave{
+
+  from{
+    transform:rotate(-55deg);
+  }
+
+  to{
+    transform:rotate(-15deg);
+  }
+}
+
+/* มือ */
+
+.hand{
+  position:absolute;
+
+  width:19px;
+  height:19px;
+
+  top:-10px;
+  left:-4px;
+
+  border-radius:50%;
+
+  background:#b9dcfa;
+  border:2px solid #559de7;
+}
+
+/* ขา */
+
+.leg{
+  position:absolute;
+
+  bottom:-10px;
+
+  width:17px;
+  height:29px;
+
+  background:#dceeff;
+
+  border:
+    3px solid #559de7;
+
+  border-radius:10px;
+}
+
+.leg.left{
+  left:38px;
+}
+
+.leg.right{
+  right:38px;
+}
+
+/* กระโดดดีใจ */
+
+@keyframes robotJump{
+
+  0%,100%{
+    transform:
+      translateY(0)
+      rotate(0deg);
+  }
+
+  20%{
+    transform:
+      translateY(-7px)
+      rotate(-3deg);
+  }
+
+  40%{
+    transform:
+      translateY(-17px)
+      rotate(3deg);
+  }
+
+  60%{
+    transform:
+      translateY(-11px)
+      rotate(-2deg);
+  }
+
+  80%{
+    transform:
+      translateY(-3px)
+      rotate(2deg);
+  }
+}
+
+/* ================= SPARKLES ================= */
+
+.sparkle{
+  position:absolute;
+  z-index:11;
+
+  color:#ffc44d;
+  font-size:24px;
+
+  pointer-events:none;
+
+  animation:
+    sparklePop 1.5s ease-in-out infinite;
+}
+
+.sparkle.one{
+  right:170px;
+  bottom:140px;
+}
+
+.sparkle.two{
+  right:65px;
+  bottom:165px;
+  animation-delay:.35s;
+}
+
+.sparkle.three{
+  right:195px;
+  bottom:45px;
+  animation-delay:.7s;
+}
+
+.sparkle.four{
+  right:35px;
+  bottom:70px;
+  animation-delay:1s;
+}
+
+@keyframes sparklePop{
+
+  0%,100%{
+    opacity:.2;
+    transform:
+      scale(.65)
+      rotate(0deg);
+  }
+
+  50%{
+    opacity:1;
+    transform:
+      scale(1.25)
+      rotate(25deg);
+  }
+}
+
+/* ================= MESSAGE ================= */
+
+.message{
+  text-align:center;
+  margin-top:24px;
+}
+
+.message-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  padding:8px 17px;
+
+  border-radius:999px;
+
+  background:#fff;
+
+  border:1px solid #d9e9f8;
+
+  box-shadow:
+    0 7px 20px
+    rgba(44,99,157,.10);
+
+  color:#1769d3;
+
+  font-size:13px;
+  font-weight:800;
+
+  animation:
+    badgeFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes badgeFloat{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-4px);
+  }
+}
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+
+  z-index:40;
+
+  background:
+    rgba(255,255,255,.97);
+
+  backdrop-filter:blur(12px);
+
+  border-top:
+    1px solid #dbe7f6;
+
+  box-shadow:
+    0 -5px 18px
+    rgba(35,75,120,.10);
+}
+
+.bottom-inner{
+  max-width:1180px;
+  margin:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:12px;
+
+  padding:10px 18px;
+}
+
+.bottom-btn{
+  min-width:125px;
+
+  padding:11px 18px;
+
+  border-radius:12px;
+
+  text-align:center;
+  text-decoration:none;
+
+  font-weight:800;
+
+  color:#1769d3;
+
+  background:#fff;
+
+  border:1px solid #cadcf2;
+
+  transition:.2s;
+}
+
+.bottom-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 7px 18px rgba(40,100,160,.12);
+}
+
+.bottom-btn.next{
+  color:#fff;
+  background:#1769d3;
+  border-color:#1769d3;
+}
+
+.bottom-center{
+  color:#7a8ca3;
+  font-size:13px;
+  font-weight:700;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  padding:28px 18px 85px;
+
+  background:#fff;
+
+  border-top:
+    1px solid #dbe7f6;
+
+  text-align:center;
+
+  color:#7385a0;
+
+  font-size:13px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:850px){
+
+  .header{
+    gap:12px;
+  }
+
+  .robot{
+    right:18px;
+    bottom:18px;
+    transform:scale(.82);
+    transform-origin:bottom right;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  nav{
+    width:100%;
+  }
+
+  main{
+    padding:
+      24px 12px 110px;
+  }
+
+  .title h2{
+    font-size:30px;
+  }
+
+  .title p{
+    font-size:14px;
+  }
+
+  .slide-card{
+    padding:6px;
+    border-radius:21px;
+  }
+
+  .image-box{
+    border-radius:16px;
+  }
+
+  .robot{
+    right:4px;
+    bottom:2px;
+    transform:scale(.58);
+    transform-origin:bottom right;
+  }
+
+  .sparkle{
+    display:none;
+  }
+
+  .bottom-center{
+    display:none;
+  }
+
+  .bottom-btn{
+    min-width:105px;
+    font-size:14px;
+  }
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+  <div class="header">
+
+    <div class="logo">
+      AI <b>Learning</b> ป.6
+    </div>
+
+    <nav>
+
+      <a href="index.html">
+        หน้าแรก
+      </a>
+
+      <a href="guide.html">
+        คู่มือครู
+      </a>
+
+      <a href="objectives.html">
+        วัตถุประสงค์
+      </a>
+
+      <a href="pretest.html">
+        Pre-test
+      </a>
+
+      <a href="lesson.html">
+        บทเรียน
+      </a>
+
+      <a href="activity.html">
+        กิจกรรม
+      </a>
+
+      <a href="posttest.html">
+        Post-test
+      </a>
+
+      <a href="summary.html">
+        สรุป
+      </a>
+
+      <a href="teacher.html" class="active">
+        ครูผู้สอน
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<!-- ================= CONTENT ================= -->
+
+<main>
+
+  <div class="title">
+
+    <h2>
+      ครูผู้สอน
+    </h2>
+
+    <p>
+      ข้อมูลผู้สอนและผู้จัดทำเว็บไซต์ AI Learning ป.6
+    </p>
+
+  </div>
+
+
+  <!-- ภาพใหม่ -->
+
+  <div class="slide-wrap">
+
+    <div class="slide-card">
+
+      <div class="image-box">
+
+        <img
+          src="https://cdn.phototourl.com/member/2026-09-10-7b129bb3-21b0-446f-88e3-0f6af22784dd.png"
+          alt="ภาพสไลด์ครูผู้สอน"
+        >
+
+        <div class="shine"></div>
+
+
+        <!-- ROBOT -->
+
+        <div class="robot">
+
+          <div class="antenna">
+            <div class="antenna-dot"></div>
+          </div>
+
+          <div class="robot-head">
+
+            <div class="robot-ear left"></div>
+            <div class="robot-ear right"></div>
+
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+
+            <div class="smile"></div>
+
+          </div>
+
+          <div class="robot-body"></div>
+
+          <div class="arm left">
+            <div class="hand"></div>
+          </div>
+
+          <div class="arm right">
+            <div class="hand"></div>
+          </div>
+
+          <div class="leg left"></div>
+          <div class="leg right"></div>
+
+        </div>
+
+
+        <!-- ดาว -->
+
+        <div class="sparkle one">✦</div>
+        <div class="sparkle two">✦</div>
+        <div class="sparkle three">✧</div>
+        <div class="sparkle four">✦</div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ข้อความเล็กใต้ภาพ -->
+
+  <div class="message">
+
+    <div class="message-badge">
+      🤖✨ ยินดีต้อนรับสู่ AI Learning ป.6
+    </div>
+
+  </div>
+
+</main>
+
+
+<!-- ================= BOTTOM ================= -->
+
+<div class="bottom-nav">
+
+  <div class="bottom-inner">
+
+    <a
+      class="bottom-btn"
+      href="summary.html"
+    >
+      ← ย้อนกลับ
+    </a>
+
+    <div class="bottom-center">
+      หน้า 9 / 9
+    </div>
+
+    <a
+      class="bottom-btn next"
+      href="index.html"
+    >
+      ถัดไป →
+    </a>
+
+  </div>
+
+</div>
+
+
+<footer>
+  AI Learning ป.6 · เว็บไซต์สื่อการเรียนรู้เรื่องปัญญาประดิษฐ์ (AI)
+</footer>
+
+</body>
+</html>

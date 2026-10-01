@@ -1,0 +1,1790 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>AI Learning ป.6 | สรุปบทเรียน</title>
+
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700;800&display=swap');
+
+
+/* =====================================================
+   BASE
+===================================================== */
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+
+  font-family:
+    Anuphan,
+    Arial,
+    sans-serif;
+
+  color:#173b70;
+}
+
+
+body{
+
+  min-height:100vh;
+
+  background:
+    #f5f9ff
+    url('https://cdn.phototourl.com/free/2026-09-08-221b082d-d9a2-40ae-99c0-58bf2ae706b6.png')
+    center top / cover fixed no-repeat;
+}
+
+
+body:before{
+
+  content:"";
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+    rgba(247,250,255,.90);
+
+  z-index:-1;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:50;
+
+  background:
+    rgba(255,255,255,.96);
+
+  border-bottom:
+    1px solid #dce7f5;
+
+  box-shadow:
+    0 2px 14px rgba(35,75,120,.10);
+}
+
+
+.header{
+
+  max-width:1180px;
+
+  margin:auto;
+
+  min-height:66px;
+
+  padding:
+    10px 18px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:24px;
+}
+
+
+.logo{
+
+  font-size:20px;
+
+  font-weight:800;
+
+  color:#1769d3;
+
+  white-space:nowrap;
+}
+
+
+.logo b{
+  color:#e64c91;
+}
+
+
+nav{
+
+  display:flex;
+
+  gap:3px;
+
+  flex:1;
+
+  overflow:auto;
+}
+
+
+nav a{
+
+  padding:
+    9px 10px;
+
+  border-radius:9px;
+
+  text-decoration:none;
+
+  color:#5b708d;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  white-space:nowrap;
+
+  transition:.2s;
+}
+
+
+nav a:hover{
+
+  background:#edf5ff;
+
+  color:#1769d3;
+}
+
+
+nav a.active{
+
+  background:#edf5ff;
+
+  color:#1769d3;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+main{
+
+  max-width:1180px;
+
+  margin:auto;
+
+  padding:
+    30px 18px 125px;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title{
+
+  text-align:center;
+
+  margin-bottom:25px;
+}
+
+
+.badge{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  padding:
+    7px 14px;
+
+  border-radius:999px;
+
+  background:#edf5ff;
+
+  color:#1769d3;
+
+  font-size:13px;
+
+  font-weight:800;
+
+  margin-bottom:10px;
+}
+
+
+.title h1{
+
+  margin:
+    0 0 8px;
+
+  font-size:
+    clamp(30px,4vw,42px);
+
+  font-weight:800;
+
+  color:#173f80;
+}
+
+
+.title p{
+
+  margin:0;
+
+  color:#6b7f9b;
+
+  font-size:15px;
+}
+
+
+/* =====================================================
+   MAIN SUMMARY CARD
+===================================================== */
+
+.summary-card{
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:30px;
+
+  padding:
+    14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.98),
+      rgba(239,247,255,.96)
+    );
+
+  border:
+    1px solid #d7e7f8;
+
+  box-shadow:
+    0 25px 65px rgba(39,91,150,.15),
+    0 8px 25px rgba(39,91,150,.07);
+}
+
+
+/* decorative glow */
+
+.summary-card:before{
+
+  content:"";
+
+  position:absolute;
+
+  width:280px;
+  height:280px;
+
+  top:-150px;
+  right:-80px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(72,151,240,.20),
+      transparent 70%
+    );
+
+  pointer-events:none;
+}
+
+
+.summary-card:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:220px;
+  height:220px;
+
+  bottom:-130px;
+  left:-80px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(231,92,153,.12),
+      transparent 70%
+    );
+
+  pointer-events:none;
+}
+
+
+/* =====================================================
+   IMAGE AREA
+===================================================== */
+
+.image-area{
+
+  position:relative;
+
+  width:100%;
+
+  aspect-ratio:
+    16 / 9;
+
+  border-radius:23px;
+
+  overflow:hidden;
+
+  background:
+    #edf5fd;
+
+  border:
+    1px solid #d9e8f7;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(23,105,211,.04);
+}
+
+
+/* image */
+
+.lesson-image{
+
+  width:100%;
+  height:100%;
+
+  display:block;
+
+  object-fit:contain;
+
+  background:#f8fbff;
+
+  animation:
+    imageIn .8s ease both;
+}
+
+
+@keyframes imageIn{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      scale(.97);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      scale(1);
+
+  }
+
+}
+
+
+/* =====================================================
+   ROBOT ANIMATION
+===================================================== */
+
+.robot{
+
+  position:absolute;
+
+  right:4%;
+
+  bottom:4%;
+
+  z-index:10;
+
+  width:
+    clamp(72px,9vw,110px);
+
+  height:
+    clamp(72px,9vw,110px);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  animation:
+    robotHappy 1.8s ease-in-out infinite;
+}
+
+
+/* robot body */
+
+.robot-body{
+
+  position:relative;
+
+  width:62%;
+
+  height:57%;
+
+  border-radius:
+    20px 20px 16px 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #dcecff
+    );
+
+  border:
+    3px solid #5292dc;
+
+  box-shadow:
+    0 10px 25px
+    rgba(37,99,170,.20);
+}
+
+
+/* robot head */
+
+.robot-head{
+
+  position:absolute;
+
+  width:72%;
+
+  height:58%;
+
+  left:14%;
+
+  top:-42%;
+
+  border-radius:
+    16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #e9f4ff
+    );
+
+  border:
+    3px solid #5292dc;
+
+  box-shadow:
+    0 7px 15px
+    rgba(37,99,170,.15);
+}
+
+
+/* eyes */
+
+.robot-eye{
+
+  position:absolute;
+
+  top:36%;
+
+  width:11px;
+  height:11px;
+
+  border-radius:50%;
+
+  background:#1769d3;
+
+  box-shadow:
+    0 0 8px
+    rgba(37,99,235,.55);
+
+  animation:
+    eyeBlink 4s infinite;
+}
+
+
+.robot-eye.left{
+  left:22%;
+}
+
+
+.robot-eye.right{
+  right:22%;
+}
+
+
+@keyframes eyeBlink{
+
+  0%,
+  45%,
+  48%,
+  100%{
+    transform:scaleY(1);
+  }
+
+  46%,
+  47%{
+    transform:scaleY(.15);
+  }
+
+}
+
+
+/* smile */
+
+.robot-mouth{
+
+  position:absolute;
+
+  left:50%;
+
+  bottom:16%;
+
+  transform:
+    translateX(-50%);
+
+  width:23px;
+  height:11px;
+
+  border-bottom:
+    3px solid #1769d3;
+
+  border-radius:
+    0 0 20px 20px;
+}
+
+
+/* antenna */
+
+.robot-antenna{
+
+  position:absolute;
+
+  left:50%;
+
+  top:-60%;
+
+  transform:
+    translateX(-50%);
+
+  width:3px;
+  height:15px;
+
+  background:#5292dc;
+}
+
+
+.robot-antenna:after{
+
+  content:"";
+
+  position:absolute;
+
+  width:8px;
+  height:8px;
+
+  top:-7px;
+  left:-2.5px;
+
+  border-radius:50%;
+
+  background:#f3a6c6;
+
+  box-shadow:
+    0 0 9px
+    rgba(236,72,153,.5);
+}
+
+
+/* arms */
+
+.robot-arm{
+
+  position:absolute;
+
+  top:23%;
+
+  width:12px;
+  height:35px;
+
+  border-radius:10px;
+
+  background:#dcecff;
+
+  border:
+    2px solid #5292dc;
+
+  transform-origin:
+    top center;
+}
+
+
+.robot-arm.left{
+
+  left:-17px;
+
+  transform:
+    rotate(24deg);
+}
+
+
+.robot-arm.right{
+
+  right:-17px;
+
+  transform:
+    rotate(-24deg);
+}
+
+
+.robot-arm.right{
+
+  animation:
+    wave 1.1s ease-in-out infinite;
+}
+
+
+@keyframes wave{
+
+  0%,
+  100%{
+    transform:
+      rotate(-24deg);
+  }
+
+  50%{
+    transform:
+      rotate(-55deg);
+  }
+
+}
+
+
+/* robot legs */
+
+.robot-leg{
+
+  position:absolute;
+
+  bottom:-22px;
+
+  width:12px;
+  height:25px;
+
+  border-radius:8px;
+
+  background:#dcecff;
+
+  border:
+    2px solid #5292dc;
+}
+
+
+.robot-leg.left{
+  left:24%;
+}
+
+
+.robot-leg.right{
+  right:24%;
+}
+
+
+/* happy animation */
+
+@keyframes robotHappy{
+
+  0%,
+  100%{
+
+    transform:
+      translateY(0)
+      rotate(0deg);
+  }
+
+  25%{
+
+    transform:
+      translateY(-8px)
+      rotate(-3deg);
+  }
+
+  50%{
+
+    transform:
+      translateY(-13px)
+      rotate(3deg);
+  }
+
+  75%{
+
+    transform:
+      translateY(-7px)
+      rotate(-2deg);
+  }
+
+}
+
+
+/* =====================================================
+   SPARKLES
+===================================================== */
+
+.sparkle{
+
+  position:absolute;
+
+  z-index:9;
+
+  font-size:
+    clamp(14px,2vw,22px);
+
+  animation:
+    sparkle 1.8s ease-in-out infinite;
+}
+
+
+.sparkle.s1{
+
+  right:17%;
+
+  bottom:21%;
+
+  animation-delay:.1s;
+}
+
+
+.sparkle.s2{
+
+  right:9%;
+
+  bottom:37%;
+
+  animation-delay:.5s;
+}
+
+
+.sparkle.s3{
+
+  right:22%;
+
+  bottom:43%;
+
+  animation-delay:.9s;
+}
+
+
+.sparkle.s4{
+
+  right:5%;
+
+  bottom:14%;
+
+  animation-delay:1.2s;
+}
+
+
+@keyframes sparkle{
+
+  0%,
+  100%{
+
+    opacity:.25;
+
+    transform:
+      scale(.7)
+      rotate(0deg);
+  }
+
+  50%{
+
+    opacity:1;
+
+    transform:
+      scale(1.15)
+      rotate(15deg);
+  }
+
+}
+
+
+/* =====================================================
+   IMAGE LABEL
+===================================================== */
+
+.image-label{
+
+  position:absolute;
+
+  top:18px;
+
+  left:18px;
+
+  z-index:10;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  padding:
+    8px 13px;
+
+  border-radius:999px;
+
+  color:#fff;
+
+  background:
+    rgba(23,59,112,.72);
+
+  backdrop-filter:
+    blur(8px);
+
+  font-size:12px;
+
+  font-weight:800;
+}
+
+
+/* =====================================================
+   SUMMARY MESSAGE
+===================================================== */
+
+.message{
+
+  margin-top:22px;
+
+  padding:
+    20px 22px;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #f0f7ff
+    );
+
+  border:
+    1px solid #dce9f7;
+
+  text-align:center;
+}
+
+
+.message h2{
+
+  margin:
+    0 0 7px;
+
+  color:#214b82;
+
+  font-size:23px;
+}
+
+
+.message p{
+
+  margin:0;
+
+  color:#607795;
+
+  font-size:14px;
+
+  line-height:1.8;
+}
+
+
+/* =====================================================
+   KEY POINTS
+===================================================== */
+
+.key-points{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:13px;
+
+  margin-top:18px;
+}
+
+
+.key{
+
+  padding:
+    17px 14px;
+
+  border-radius:16px;
+
+  background:#fff;
+
+  border:
+    1px solid #dce8f5;
+
+  text-align:center;
+
+  box-shadow:
+    0 6px 18px
+    rgba(49,95,150,.07);
+
+  transition:.2s;
+}
+
+
+.key:hover{
+
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 12px 25px
+    rgba(49,95,150,.12);
+}
+
+
+.key-icon{
+
+  width:43px;
+  height:43px;
+
+  margin:
+    0 auto 9px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1769d3,
+      #65a9ed
+    );
+
+  color:#fff;
+
+  font-size:18px;
+
+  font-weight:800;
+}
+
+
+.key:nth-child(2)
+.key-icon{
+  background:
+    linear-gradient(
+      135deg,
+      #7657d9,
+      #a98df1
+    );
+}
+
+
+.key:nth-child(3)
+.key-icon{
+  background:
+    linear-gradient(
+      135deg,
+      #15945d,
+      #5dcc91
+    );
+}
+
+
+.key:nth-child(4)
+.key-icon{
+  background:
+    linear-gradient(
+      135deg,
+      #e64c91,
+      #f58ab8
+    );
+}
+
+
+.key h3{
+
+  margin:
+    0 0 4px;
+
+  color:#294e82;
+
+  font-size:15px;
+}
+
+
+.key p{
+
+  margin:0;
+
+  color:#71839b;
+
+  font-size:12px;
+
+  line-height:1.6;
+}
+
+
+/* =====================================================
+   NEXT MESSAGE
+===================================================== */
+
+.next-card{
+
+  margin-top:20px;
+
+  padding:
+    18px;
+
+  text-align:center;
+
+  border-radius:18px;
+
+  background:
+    #f0f7ff;
+
+  border:
+    1px solid #d6e7f8;
+
+  color:#527095;
+
+  font-size:14px;
+
+  line-height:1.8;
+}
+
+
+.next-card strong{
+
+  color:#1769d3;
+}
+
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
+
+.bottom-nav{
+
+  position:fixed;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  z-index:40;
+
+  background:
+    rgba(255,255,255,.97);
+
+  border-top:
+    1px solid #dbe7f6;
+
+  box-shadow:
+    0 -4px 15px
+    rgba(35,75,120,.10);
+}
+
+
+.bottom-inner{
+
+  max-width:1180px;
+
+  margin:auto;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:
+    10px 18px;
+
+  gap:12px;
+}
+
+
+.bottom-btn{
+
+  min-width:120px;
+
+  padding:
+    11px 17px;
+
+  border-radius:11px;
+
+  text-decoration:none;
+
+  font-weight:800;
+
+  text-align:center;
+
+  border:
+    1px solid #cadcf2;
+
+  background:#fff;
+
+  color:#1769d3;
+
+  transition:.2s;
+}
+
+
+.bottom-btn:hover{
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 5px 15px
+    rgba(23,105,211,.12);
+}
+
+
+.bottom-btn.next{
+
+  background:#1769d3;
+
+  color:#fff;
+
+  border-color:#1769d3;
+}
+
+
+.bottom-center{
+
+  font-size:12px;
+
+  color:#7a8ca3;
+
+  font-weight:700;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+  background:#fff;
+
+  border-top:
+    1px solid #dbe7f6;
+
+  text-align:center;
+
+  padding:24px;
+
+  color:#7385a0;
+
+  font-size:13px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:900px){
+
+  .key-points{
+
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+}
+
+
+@media(max-width:600px){
+
+  .header{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+    padding:
+      10px 12px;
+  }
+
+
+  nav{
+
+    width:100%;
+  }
+
+
+  main{
+
+    padding:
+      18px 10px 100px;
+  }
+
+
+  .title h1{
+
+    font-size:29px;
+  }
+
+
+  .title p{
+
+    font-size:13px;
+  }
+
+
+  .summary-card{
+
+    padding:7px;
+
+    border-radius:20px;
+  }
+
+
+  .image-area{
+
+    border-radius:15px;
+  }
+
+
+  .image-label{
+
+    top:10px;
+
+    left:10px;
+
+    font-size:10px;
+
+    padding:
+      6px 9px;
+  }
+
+
+  .robot{
+
+    right:6%;
+
+    bottom:5%;
+  }
+
+
+  .message{
+
+    padding:
+      17px;
+  }
+
+
+  .message h2{
+
+    font-size:20px;
+  }
+
+
+  .message p{
+
+    font-size:13px;
+  }
+
+
+  .key-points{
+
+    grid-template-columns:
+      1fr 1fr;
+
+    gap:9px;
+  }
+
+
+  .key{
+
+    padding:
+      14px 9px;
+  }
+
+
+  .key-icon{
+
+    width:38px;
+    height:38px;
+
+    font-size:15px;
+  }
+
+
+  .key h3{
+
+    font-size:13px;
+  }
+
+
+  .key p{
+
+    font-size:11px;
+  }
+
+
+  .bottom-center{
+
+    display:none;
+  }
+
+
+  .bottom-btn{
+
+    min-width:105px;
+
+    padding:
+      10px 12px;
+
+    font-size:12px;
+  }
+
+}
+
+
+@media(prefers-reduced-motion:reduce){
+
+  .robot,
+  .robot-arm.right,
+  .robot-eye,
+  .sparkle,
+  .lesson-image{
+
+    animation:none !important;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+  <div class="header">
+
+
+    <div class="logo">
+
+      AI <b>Learning</b> ป.6
+
+    </div>
+
+
+    <nav>
+
+      <a href="index.html">
+        หน้าแรก
+      </a>
+
+      <a href="guide.html">
+        คู่มือครู
+      </a>
+
+      <a href="objectives.html">
+        วัตถุประสงค์
+      </a>
+
+      <a href="pretest.html">
+        Pre-test
+      </a>
+
+      <a href="lesson.html">
+        บทเรียน
+      </a>
+
+      <a href="activity.html">
+        กิจกรรม
+      </a>
+
+      <a href="posttest.html">
+        Post-test
+      </a>
+
+      <a
+        href="summary.html"
+        class="active"
+      >
+        สรุป
+      </a>
+
+      <a href="teacher.html">
+        ครูผู้สอน
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+  <div class="title">
+
+
+    <div class="badge">
+
+      ✦ AI LEARNING SUMMARY
+
+    </div>
+
+
+    <h1>
+
+      สรุปบทเรียน
+
+    </h1>
+
+
+    <p>
+
+      สิ่งสำคัญที่ควรจำเกี่ยวกับปัญญาประดิษฐ์ (AI)
+
+    </p>
+
+
+  </div>
+
+
+
+  <!-- =================================================
+       IMAGE
+  ================================================== -->
+
+  <div class="summary-card">
+
+
+    <div class="image-area">
+
+
+      <!-- ภาพที่ผู้ใช้ส่งมา -->
+
+      <img
+
+        class="lesson-image"
+
+        src="https://cdn.phototourl.com/member/2026-09-10-7cef070d-df11-4035-8d61-60366705c849.png"
+
+        alt="สรุปบทเรียน AI"
+
+        draggable="false"
+
+      >
+
+
+      <!-- label -->
+
+      <div class="image-label">
+
+        🤖 สรุปบทเรียน AI
+
+      </div>
+
+
+
+      <!-- =================================================
+           ROBOT
+      ================================================== -->
+
+      <div class="robot">
+
+
+        <div class="robot-body">
+
+
+          <div class="robot-head">
+
+
+            <div class="robot-antenna"></div>
+
+
+            <div
+              class="robot-eye left"
+            ></div>
+
+
+            <div
+              class="robot-eye right"
+            ></div>
+
+
+            <div class="robot-mouth"></div>
+
+
+          </div>
+
+
+          <div class="robot-arm left"></div>
+
+          <div class="robot-arm right"></div>
+
+          <div class="robot-leg left"></div>
+
+          <div class="robot-leg right"></div>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Sparkles -->
+
+      <div class="sparkle s1">
+        ✨
+      </div>
+
+      <div class="sparkle s2">
+        ⭐
+      </div>
+
+      <div class="sparkle s3">
+        ✦
+      </div>
+
+      <div class="sparkle s4">
+        ✨
+      </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         MESSAGE
+    ================================================== -->
+
+    <div class="message">
+
+
+      <h2>
+
+        🎉 เก่งมาก! เรียนรู้เรื่อง AI ครบแล้ว
+
+      </h2>
+
+
+      <p>
+
+        AI เป็นเทคโนโลยีที่ช่วยให้ระบบสามารถ
+        ทำงานบางอย่างคล้ายความสามารถของมนุษย์
+        เราสามารถพบ AI ได้ในชีวิตประจำวัน
+        และควรใช้ AI อย่างรู้เท่าทันและรับผิดชอบ
+
+      </p>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         KEY POINTS
+    ================================================== -->
+
+    <div class="key-points">
+
+
+      <div class="key">
+
+        <div class="key-icon">
+          01
+        </div>
+
+        <h3>
+          AI คืออะไร?
+        </h3>
+
+        <p>
+          เทคโนโลยีที่ช่วยให้ระบบทำงาน
+          บางอย่างคล้ายมนุษย์
+        </p>
+
+      </div>
+
+
+
+      <div class="key">
+
+        <div class="key-icon">
+          02
+        </div>
+
+        <h3>
+          AI ใช้ข้อมูล
+        </h3>
+
+        <p>
+          ใช้ข้อมูลเพื่อวิเคราะห์
+          เรียนรู้ และสร้างผลลัพธ์
+        </p>
+
+      </div>
+
+
+
+      <div class="key">
+
+        <div class="key-icon">
+          03
+        </div>
+
+        <h3>
+          AI อยู่รอบตัว
+        </h3>
+
+        <p>
+          พบได้ในมือถือ แอป
+          ผู้ช่วยเสียง และอุปกรณ์อัจฉริยะ
+        </p>
+
+      </div>
+
+
+
+      <div class="key">
+
+        <div class="key-icon">
+          04
+        </div>
+
+        <h3>
+          ใช้อย่างรับผิดชอบ
+        </h3>
+
+        <p>
+          ตรวจสอบข้อมูล
+          และปกป้องข้อมูลส่วนตัว
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         NEXT
+    ================================================== -->
+
+    <div class="next-card">
+
+      💡 <strong>จำไว้ว่า:</strong>
+
+      AI เป็นผู้ช่วยของเรา
+      แต่การคิด วิเคราะห์
+      และการตัดสินใจยังเป็นหน้าที่ของเรา
+
+    </div>
+
+
+  </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
+
+<div class="bottom-nav">
+
+  <div class="bottom-inner">
+
+
+    <a
+      class="bottom-btn"
+      href="posttest.html"
+    >
+
+      ← ย้อนกลับ
+
+    </a>
+
+
+    <div class="bottom-center">
+
+      หน้า 8 / 9
+
+    </div>
+
+
+    <a
+      class="bottom-btn next"
+      href="teacher.html"
+    >
+
+      ถัดไป →
+
+    </a>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+  AI Learning ป.6 ·
+  เว็บไซต์สื่อการเรียนรู้เรื่องปัญญาประดิษฐ์ (AI)
+
+</footer>
+
+
+</body>
+
+</html>

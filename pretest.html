@@ -1,0 +1,1385 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<title>AI Learning ป.6 | Pre-test</title>
+
+
+<style>
+
+/* =====================================================
+   FONT
+===================================================== */
+
+@import url(
+    'https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700;800&display=swap'
+);
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    font-family:
+        "Anuphan",
+        Arial,
+        sans-serif;
+    color:#173b70;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body{
+
+    background:
+        #f5f9ff
+        url(
+            'https://cdn.phototourl.com/free/2026-09-08-221b082d-d9a2-40ae-99c0-58bf2ae706b6.png'
+        )
+        center top/
+        cover
+        fixed
+        no-repeat;
+
+    min-height:100vh;
+
+}
+
+body:before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(247,250,255,.87);
+
+    z-index:-1;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:30;
+
+    background:#fff;
+
+    border-bottom:
+        1px solid #dce7f5;
+
+    box-shadow:
+        0 2px 14px
+        rgba(35,75,120,.10);
+
+}
+
+.header{
+
+    max-width:1180px;
+
+    margin:auto;
+
+    min-height:66px;
+
+    padding:
+        10px 18px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+
+}
+
+.logo{
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:#1769d3;
+
+    white-space:nowrap;
+
+}
+
+.logo b{
+
+    color:#e64c91;
+
+}
+
+
+/* =====================================================
+   NAV
+===================================================== */
+
+nav{
+
+    display:flex;
+
+    gap:3px;
+
+    flex:1;
+
+    overflow:auto;
+
+}
+
+nav a{
+
+    padding:
+        9px 10px;
+
+    border-radius:9px;
+
+    text-decoration:none;
+
+    color:#5b708d;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+nav a:hover{
+
+    background:#edf5ff;
+
+    color:#1769d3;
+
+}
+
+nav a.active{
+
+    background:#edf5ff;
+
+    color:#1769d3;
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+main{
+
+    max-width:1180px;
+
+    margin:auto;
+
+    padding:
+        26px 18px
+        105px;
+
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.page{
+
+    margin-top:5px;
+
+}
+
+.title{
+
+    margin-bottom:20px;
+
+}
+
+.title h2{
+
+    margin:0;
+
+    font-size:30px;
+
+    color:#173f80;
+
+}
+
+.title p{
+
+    margin:
+        6px 0 0;
+
+    color:#6b7f9b;
+
+}
+
+
+/* =====================================================
+   PRETEST HERO
+===================================================== */
+
+.pretest-hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:220px;
+
+    margin-bottom:20px;
+
+    padding:
+        32px;
+
+    border-radius:24px;
+
+    background:
+
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(99,169,239,.25),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 15% 90%,
+            rgba(230,76,145,.15),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #eef7ff
+        );
+
+    border:
+        1px solid #d5e5f7;
+
+    box-shadow:
+        0 15px 40px
+        rgba(49,95,150,.12);
+
+}
+
+.pretest-hero:after{
+
+    content:"AI";
+
+    position:absolute;
+
+    right:30px;
+
+    bottom:-60px;
+
+    font-size:190px;
+
+    font-weight:800;
+
+    color:#e8f2ff;
+
+    pointer-events:none;
+
+}
+
+.pretest-content{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:700px;
+
+}
+
+.pretest-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:
+        7px 13px;
+
+    border-radius:999px;
+
+    background:#edf5ff;
+
+    color:#1769d3;
+
+    font-size:13px;
+
+    font-weight:800;
+
+}
+
+.pretest-hero h1{
+
+    margin:
+        13px 0 8px;
+
+    font-size:
+        clamp(28px,4vw,42px);
+
+    line-height:1.2;
+
+    color:#173f80;
+
+}
+
+.pretest-hero h1 span{
+
+    color:#e64c91;
+
+}
+
+.pretest-hero p{
+
+    margin:0;
+
+    color:#607795;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+
+/* =====================================================
+   INFO CARDS
+===================================================== */
+
+.info-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.info-card{
+
+    padding:
+        18px;
+
+    border-radius:17px;
+
+    background:#fff;
+
+    border:
+        1px solid #dbe7f6;
+
+    box-shadow:
+        0 7px 22px
+        rgba(49,95,150,.08);
+
+}
+
+.info-icon{
+
+    width:43px;
+
+    height:43px;
+
+    border-radius:12px;
+
+    display:grid;
+
+    place-items:center;
+
+    margin-bottom:10px;
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1769d3,
+            #63a9ef
+        );
+
+}
+
+.info-card:nth-child(2)
+.info-icon{
+
+    background:
+        linear-gradient(
+            135deg,
+            #e64c91,
+            #f58ab8
+        );
+
+}
+
+.info-card:nth-child(3)
+.info-icon{
+
+    background:
+        linear-gradient(
+            135deg,
+            #f39b2f,
+            #ffc15a
+        );
+
+}
+
+.info-card h3{
+
+    margin:
+        0 0 5px;
+
+    color:#294e82;
+
+    font-size:17px;
+
+}
+
+.info-card p{
+
+    margin:0;
+
+    color:#6a7e99;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+}
+
+
+/* =====================================================
+   IFRAME CONTAINER
+===================================================== */
+
+.quiz-wrapper{
+
+    position:relative;
+
+    width:100%;
+
+    padding:0;
+
+    border-radius:24px;
+
+    background:#fff;
+
+    border:
+        1px solid #dbe7f6;
+
+    box-shadow:
+        0 15px 45px
+        rgba(49,95,150,.13);
+
+    overflow:hidden;
+
+}
+
+
+/* =====================================================
+   IFRAME TOP BAR
+===================================================== */
+
+.quiz-topbar{
+
+    min-height:56px;
+
+    padding:
+        10px 17px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7fbff,
+            #eef6ff
+        );
+
+    border-bottom:
+        1px solid #dce8f6;
+
+}
+
+.quiz-top-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#294e82;
+
+    font-size:14px;
+
+    font-weight:800;
+
+}
+
+.ai-dot{
+
+    width:30px;
+
+    height:30px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1769d3,
+            #63a9ef
+        );
+
+    color:#fff;
+
+}
+
+.quiz-status{
+
+    padding:
+        6px 10px;
+
+    border-radius:999px;
+
+    background:#eef8f2;
+
+    border:
+        1px solid #ccebd9;
+
+    color:#15945d;
+
+    font-size:11px;
+
+    font-weight:800;
+
+}
+
+
+/* =====================================================
+   IFRAME
+===================================================== */
+
+.quiz-iframe-container{
+
+    width:100%;
+
+    background:#f8fbff;
+
+    padding:0;
+
+}
+
+.quiz-iframe{
+
+    display:block;
+
+    width:100%;
+
+    height:950px;
+
+    min-height:750px;
+
+    border:0;
+
+    background:#fff;
+
+}
+
+
+/* =====================================================
+   NOTE
+===================================================== */
+
+.exam-note{
+
+    margin-top:17px;
+
+    padding:
+        14px 16px;
+
+    border-radius:14px;
+
+    background:#f0f7ff;
+
+    border-left:
+        4px solid #2c83e8;
+
+    color:#41658e;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+}
+
+.exam-note strong{
+
+    color:#1769d3;
+
+}
+
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
+
+.bottom-nav{
+
+    position:fixed;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    z-index:40;
+
+    background:
+        rgba(255,255,255,.97);
+
+    border-top:
+        1px solid #dbe7f6;
+
+    box-shadow:
+        0 -4px 15px
+        rgba(35,75,120,.10);
+
+}
+
+.bottom-inner{
+
+    max-width:1180px;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:
+        10px 18px;
+
+    gap:12px;
+
+}
+
+.bottom-btn{
+
+    min-width:120px;
+
+    padding:
+        11px 17px;
+
+    border-radius:11px;
+
+    text-decoration:none;
+
+    font-weight:800;
+
+    text-align:center;
+
+    border:
+        1px solid #cadcf2;
+
+    background:#fff;
+
+    color:#1769d3;
+
+    transition:.18s;
+
+}
+
+.bottom-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 5px 15px
+        rgba(49,95,150,.12);
+
+}
+
+.bottom-btn.next{
+
+    background:#1769d3;
+
+    color:#fff;
+
+    border-color:#1769d3;
+
+}
+
+.bottom-center{
+
+    font-size:12px;
+
+    color:#7a8ca3;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    background:#fff;
+
+    border-top:
+        1px solid #dbe7f6;
+
+    text-align:center;
+
+    padding:24px;
+
+    color:#7385a0;
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:850px){
+
+    .info-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+    nav a{
+
+        font-size:12px;
+
+        padding:
+            8px 7px;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .header{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        gap:10px;
+
+    }
+
+    nav{
+
+        width:100%;
+
+    }
+
+    main{
+
+        padding:
+            16px 12px
+            95px;
+
+    }
+
+    .pretest-hero{
+
+        padding:25px 20px;
+
+    }
+
+    .pretest-hero h1{
+
+        font-size:29px;
+
+    }
+
+    .info-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .quiz-wrapper{
+
+        border-radius:17px;
+
+    }
+
+    .quiz-topbar{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+    }
+
+    .quiz-iframe{
+
+        height:1050px;
+
+        min-height:900px;
+
+    }
+
+    .bottom-center{
+
+        display:none;
+
+    }
+
+    .bottom-btn{
+
+        min-width:105px;
+
+    }
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.iframe-loading{
+
+    position:absolute;
+
+    inset:56px 0 0;
+
+    z-index:5;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    pointer-events:none;
+
+    background:
+        rgba(248,251,255,.92);
+
+    transition:.3s;
+
+}
+
+.iframe-loading.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+}
+
+.loading-box{
+
+    text-align:center;
+
+    color:#53708f;
+
+    font-size:13px;
+
+}
+
+.loading-spinner{
+
+    width:40px;
+
+    height:40px;
+
+    margin:
+        0 auto 12px;
+
+    border-radius:50%;
+
+    border:
+        4px solid #dce9f7;
+
+    border-top-color:#1769d3;
+
+    animation:
+        spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ===================================================
+     HEADER
+=================================================== -->
+
+<header>
+
+<div class="header">
+
+
+<div class="logo">
+    AI <b>Learning</b> ป.6
+</div>
+
+
+<nav>
+
+<a href="index.html">
+    หน้าแรก
+</a>
+
+<a href="guide.html">
+    คู่มือครู
+</a>
+
+<a href="objectives.html">
+    วัตถุประสงค์
+</a>
+
+<a
+    href="pretest.html"
+    class="active"
+>
+    Pre-test
+</a>
+
+<a href="lesson.html">
+    บทเรียน
+</a>
+
+<a href="activity.html">
+    กิจกรรม
+</a>
+
+<a href="posttest.html">
+    Post-test
+</a>
+
+<a href="summary.html">
+    สรุป
+</a>
+
+<a href="teacher.html">
+    ครูผู้สอน
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
+
+<!-- ===================================================
+     MAIN
+=================================================== -->
+
+<main>
+
+
+<section class="page">
+
+
+<!-- =================================================
+     TITLE
+================================================= -->
+
+<div class="title">
+
+<h2>
+    Pre-test : แบบทดสอบก่อนเรียน
+</h2>
+
+<p>
+    แบบทดสอบก่อนเรียนเรื่องปัญญาประดิษฐ์ (AI)
+</p>
+
+</div>
+
+
+
+<!-- =================================================
+     HERO
+================================================= -->
+
+<section class="pretest-hero">
+
+<div class="pretest-content">
+
+<div class="pretest-badge">
+    🤖 AI LEARNING
+</div>
+
+<h1>
+    พร้อมหรือยัง?
+    <span>เริ่มทำ Pre-test</span>
+</h1>
+
+<p>
+    แบบทดสอบก่อนเรียนสำหรับนักเรียนชั้นประถมศึกษาปีที่ 6
+    กรุณากรอกข้อมูลเพื่อเข้าสู่ระบบ แล้วทำแบบทดสอบตามเวลาที่กำหนด
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =================================================
+     INFO
+================================================= -->
+
+<div class="info-grid">
+
+
+<div class="info-card">
+
+<div class="info-icon">
+    📝
+</div>
+
+<h3>
+    แบบทดสอบ
+</h3>
+
+<p>
+    แบบทดสอบความรู้พื้นฐานเกี่ยวกับ
+    เทคโนโลยีและปัญญาประดิษฐ์
+</p>
+
+</div>
+
+
+
+<div class="info-card">
+
+<div class="info-icon">
+    ⏱
+</div>
+
+<h3>
+    จับเวลา
+</h3>
+
+<p>
+    ระบบมีการกำหนดเวลาในการทำแบบทดสอบ
+    และส่งคำตอบอัตโนมัติเมื่อหมดเวลา
+</p>
+
+</div>
+
+
+
+<div class="info-card">
+
+<div class="info-icon">
+    📊
+</div>
+
+<h3>
+    บันทึกคะแนน
+</h3>
+
+<p>
+    คะแนนจะถูกบันทึกเข้าสู่ฐานข้อมูล
+    Google Sheet โดยอัตโนมัติ
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =================================================
+     QUIZ SYSTEM
+================================================= -->
+
+<div class="quiz-wrapper">
+
+
+<div class="quiz-topbar">
+
+
+<div class="quiz-top-title">
+
+<div class="ai-dot">
+    AI
+</div>
+
+<span>
+    ระบบข้อสอบออนไลน์
+</span>
+
+</div>
+
+
+<div class="quiz-status">
+    ● ระบบออนไลน์
+</div>
+
+
+</div>
+
+
+
+<div class="quiz-iframe-container">
+
+
+<div
+    id="iframeLoading"
+    class="iframe-loading"
+>
+
+<div class="loading-box">
+
+<div class="loading-spinner"></div>
+
+กำลังโหลดระบบข้อสอบ...
+
+</div>
+
+</div>
+
+
+
+<iframe
+
+    id="examFrame"
+
+    class="quiz-iframe"
+
+    src="https://script.google.com/macros/s/AKfycbxhhBtkO7DnWn8oUSgBpuDc5hKA13lBVr2LWHfqk7qt-Oymvd-tXc8-231fLKUuAy_xWA/exec"
+
+    title="AI Learning ป.6 - ระบบข้อสอบ Pre-test"
+
+    allow="fullscreen"
+
+    loading="eager"
+
+    referrerpolicy="strict-origin-when-cross-origin"
+
+></iframe>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =================================================
+     NOTE
+================================================= -->
+
+<div class="exam-note">
+
+<strong>💡 คำแนะนำก่อนทำแบบทดสอบ</strong>
+
+<br>
+
+กรุณาตรวจสอบเลขที่และชื่อ-นามสกุลให้ถูกต้อง
+ก่อนเข้าสู่ระบบ เมื่อเริ่มทำแบบทดสอบแล้ว
+ควรทำให้ครบทุกข้อภายในเวลาที่กำหนด
+และตรวจสอบคำตอบก่อนกดส่ง
+
+</div>
+
+
+</section>
+
+</main>
+
+
+
+<!-- ===================================================
+     BOTTOM NAV
+=================================================== -->
+
+<div class="bottom-nav">
+
+<div class="bottom-inner">
+
+
+<a
+    class="bottom-btn"
+    href="objectives.html"
+>
+    ← ย้อนกลับ
+</a>
+
+
+<div class="bottom-center">
+    หน้า 4 / 9
+</div>
+
+
+<a
+    class="bottom-btn next"
+    href="lesson.html"
+>
+    ถัดไป →
+</a>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ===================================================
+     FOOTER
+=================================================== -->
+
+<footer>
+
+AI Learning ป.6 ·
+เว็บไซต์สื่อการเรียนรู้เรื่องปัญญาประดิษฐ์ (AI)
+
+</footer>
+
+
+
+<!-- ===================================================
+     JAVASCRIPT
+=================================================== -->
+
+<script>
+
+/* =====================================================
+   IFRAME LOADING
+===================================================== */
+
+var examFrame =
+    document.getElementById("examFrame");
+
+var iframeLoading =
+    document.getElementById("iframeLoading");
+
+
+examFrame.addEventListener(
+    "load",
+    function(){
+
+        iframeLoading.classList.add(
+            "hide"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PREVENT DOUBLE CLICK
+===================================================== */
+
+var links =
+    document.querySelectorAll("nav a");
+
+
+for(
+    var i = 0;
+    i < links.length;
+    i++
+){
+
+    links[i].addEventListener(
+        "click",
+        function(){
+
+            this.style.opacity = "0.7";
+
+        }
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

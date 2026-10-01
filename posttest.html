@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>AI Learning ป.6 | Post-test</title>
+
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700;800&display=swap');
+
+
+*{
+  box-sizing:border-box;
+}
+
+
+html,
+body{
+  margin:0;
+  padding:0;
+
+  font-family:
+    Anuphan,
+    Arial,
+    sans-serif;
+
+  color:#173b70;
+}
+
+
+body{
+
+  background:
+    #f5f9ff
+    url('https://cdn.phototourl.com/free/2026-09-08-221b082d-d9a2-40ae-99c0-58bf2ae706b6.png')
+    center top / cover fixed no-repeat;
+
+  min-height:100vh;
+}
+
+
+body:before{
+
+  content:"";
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+    rgba(247,250,255,.90);
+
+  z-index:-1;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:30;
+
+  background:
+    rgba(255,255,255,.96);
+
+  border-bottom:
+    1px solid #dce7f5;
+
+  box-shadow:
+    0 2px 14px rgba(35,75,120,.10);
+}
+
+
+.header{
+
+  max-width:1180px;
+
+  margin:auto;
+
+  min-height:66px;
+
+  padding:
+    10px 18px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:24px;
+}
+
+
+.logo{
+
+  font-size:20px;
+
+  font-weight:800;
+
+  color:#1769d3;
+
+  white-space:nowrap;
+}
+
+
+.logo b{
+  color:#e64c91;
+}
+
+
+nav{
+
+  display:flex;
+
+  gap:3px;
+
+  flex:1;
+
+  overflow:auto;
+}
+
+
+nav a{
+
+  padding:
+    9px 10px;
+
+  border-radius:9px;
+
+  text-decoration:none;
+
+  color:#5b708d;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  white-space:nowrap;
+
+  transition:.2s;
+}
+
+
+nav a:hover{
+
+  background:#edf5ff;
+
+  color:#1769d3;
+}
+
+
+nav a.active{
+
+  background:#edf5ff;
+
+  color:#1769d3;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+main{
+
+  max-width:1180px;
+
+  margin:auto;
+
+  padding:
+    30px 18px 115px;
+}
+
+
+.title{
+
+  text-align:center;
+
+  margin-bottom:25px;
+}
+
+
+.badge{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  padding:
+    7px 14px;
+
+  border-radius:999px;
+
+  background:#edf5ff;
+
+  color:#1769d3;
+
+  font-size:13px;
+
+  font-weight:800;
+
+  margin-bottom:10px;
+}
+
+
+.title h1{
+
+  margin:
+    0 0 7px;
+
+  font-size:
+    clamp(28px,4vw,38px);
+
+  color:#173f80;
+
+  font-weight:800;
+}
+
+
+.title p{
+
+  margin:0;
+
+  color:#6b7f9b;
+
+  font-size:15px;
+}
+
+
+/* =====================================================
+   GOOGLE SCRIPT EMBED
+===================================================== */
+
+.exam-card{
+
+  position:relative;
+
+  width:100%;
+
+  padding:12px;
+
+  border-radius:28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.98),
+      rgba(239,247,255,.96)
+    );
+
+  border:
+    1px solid #d8e7f8;
+
+  box-shadow:
+    0 24px 65px rgba(39,91,150,.15),
+    0 8px 25px rgba(39,91,150,.07);
+
+  overflow:hidden;
+}
+
+
+.exam-card:before{
+
+  content:"";
+
+  position:absolute;
+
+  width:220px;
+
+  height:220px;
+
+  top:-120px;
+
+  right:-80px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(73,145,235,.15),
+      transparent 70%
+    );
+
+  pointer-events:none;
+}
+
+
+.exam-frame-wrap{
+
+  position:relative;
+
+  width:100%;
+
+  height:
+    780px;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  background:#fff;
+
+  border:
+    1px solid #dbe7f6;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(23,105,211,.04);
+}
+
+
+.exam-frame{
+
+  display:block;
+
+  width:100%;
+
+  height:100%;
+
+  border:0;
+
+  background:#fff;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading{
+
+  position:absolute;
+
+  inset:0;
+
+  z-index:2;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:12px;
+
+  background:
+    rgba(255,255,255,.96);
+
+  color:#1769d3;
+
+  font-weight:700;
+
+  pointer-events:none;
+
+  transition:.3s;
+}
+
+
+.loading.hide{
+
+  opacity:0;
+
+  visibility:hidden;
+}
+
+
+.loader{
+
+  width:38px;
+
+  height:38px;
+
+  border-radius:50%;
+
+  border:
+    4px solid #dceafe;
+
+  border-top-color:#1769d3;
+
+  animation:
+    spin .8s linear infinite;
+}
+
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+
+/* =====================================================
+   SOURCE / INFO
+===================================================== */
+
+.info{
+
+  margin-top:20px;
+
+  padding:
+    18px 20px;
+
+  border-radius:17px;
+
+  background:
+    #f8fbff;
+
+  border:
+    1px solid #dce9f7;
+
+  color:#607795;
+
+  font-size:13px;
+
+  line-height:1.8;
+
+  text-align:center;
+}
+
+
+.info strong{
+
+  color:#294e82;
+}
+
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
+
+.bottom-nav{
+
+  position:fixed;
+
+  left:0;
+
+  right:0;
+
+  bottom:0;
+
+  z-index:40;
+
+  background:
+    rgba(255,255,255,.97);
+
+  border-top:
+    1px solid #dbe7f6;
+
+  box-shadow:
+    0 -4px 15px rgba(35,75,120,.10);
+}
+
+
+.bottom-inner{
+
+  max-width:1180px;
+
+  margin:auto;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:
+    10px 18px;
+
+  gap:12px;
+}
+
+
+.bottom-btn{
+
+  min-width:120px;
+
+  padding:
+    11px 17px;
+
+  border-radius:11px;
+
+  text-decoration:none;
+
+  font-weight:800;
+
+  text-align:center;
+
+  border:
+    1px solid #cadcf2;
+
+  background:#fff;
+
+  color:#1769d3;
+
+  transition:.2s;
+}
+
+
+.bottom-btn:hover{
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 5px 15px rgba(23,105,211,.12);
+}
+
+
+.bottom-btn.next{
+
+  background:#1769d3;
+
+  color:#fff;
+
+  border-color:#1769d3;
+}
+
+
+.bottom-center{
+
+  font-size:12px;
+
+  color:#7a8ca3;
+
+  font-weight:700;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+  background:#fff;
+
+  border-top:
+    1px solid #dbe7f6;
+
+  text-align:center;
+
+  padding:24px;
+
+  color:#7385a0;
+
+  font-size:13px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:850px){
+
+  .header{
+
+    gap:14px;
+  }
+
+  nav a{
+
+    font-size:12px;
+
+    padding:
+      8px 7px;
+  }
+
+  .exam-frame-wrap{
+
+    height:760px;
+  }
+
+}
+
+
+@media(max-width:600px){
+
+  .header{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+    padding:
+      10px 12px;
+  }
+
+
+  nav{
+
+    width:100%;
+  }
+
+
+  main{
+
+    padding:
+      18px 10px 100px;
+  }
+
+
+  .title h1{
+
+    font-size:27px;
+  }
+
+
+  .title p{
+
+    font-size:13px;
+  }
+
+
+  .exam-card{
+
+    padding:6px;
+
+    border-radius:19px;
+  }
+
+
+  .exam-frame-wrap{
+
+    height:760px;
+
+    border-radius:14px;
+  }
+
+
+  .bottom-center{
+
+    display:none;
+  }
+
+
+  .bottom-btn{
+
+    min-width:105px;
+
+    padding:
+      10px 12px;
+
+    font-size:12px;
+  }
+
+
+  .info{
+
+    font-size:12px;
+
+    padding:
+      14px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+  <div class="header">
+
+
+    <div class="logo">
+
+      AI <b>Learning</b> ป.6
+
+    </div>
+
+
+    <nav>
+
+      <a href="index.html">
+        หน้าแรก
+      </a>
+
+      <a href="guide.html">
+        คู่มือครู
+      </a>
+
+      <a href="objectives.html">
+        วัตถุประสงค์
+      </a>
+
+      <a href="pretest.html">
+        Pre-test
+      </a>
+
+      <a href="lesson.html">
+        บทเรียน
+      </a>
+
+      <a href="activity.html">
+        กิจกรรม
+      </a>
+
+      <a
+        href="posttest.html"
+        class="active"
+      >
+        Post-test
+      </a>
+
+      <a href="summary.html">
+        สรุป
+      </a>
+
+      <a href="teacher.html">
+        ครูผู้สอน
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+  <div class="title">
+
+
+    <div class="badge">
+
+      ✦ POST-TEST
+
+    </div>
+
+
+    <h1>
+
+      แบบทดสอบหลังเรียน
+
+    </h1>
+
+
+    <p>
+
+      ทำแบบทดสอบหลังจากศึกษาเนื้อหาเรื่อง AI ครบแล้ว
+
+    </p>
+
+
+  </div>
+
+
+
+  <!-- =================================================
+       GOOGLE APPS SCRIPT
+  ================================================== -->
+
+  <div class="exam-card">
+
+
+    <div class="exam-frame-wrap">
+
+
+      <!-- Loading -->
+
+      <div
+        class="loading"
+        id="loading"
+      >
+
+        <div class="loader"></div>
+
+        <div>
+          กำลังโหลดแบบทดสอบ...
+        </div>
+
+      </div>
+
+
+
+      <!-- Google Apps Script -->
+
+      <iframe
+
+        id="examFrame"
+
+        class="exam-frame"
+
+        src="https://script.google.com/macros/s/AKfycbwiZ5d9Z4gvqzr5GRT4gFWKh6pV0H-L6XEmpsCR3AuxcTD-GYtGLBpBG3xOjBCeGODiFQ/exec"
+
+        title="แบบทดสอบหลังเรียน AI Learning ป.6"
+
+        allow="fullscreen"
+
+        loading="eager"
+
+      ></iframe>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- =================================================
+       INFO
+  ================================================== -->
+
+  <div class="info">
+
+    <strong>
+      📌 แบบทดสอบ Post-test
+    </strong>
+
+    <br>
+
+    แบบทดสอบนี้เชื่อมต่อกับระบบ Google Apps Script
+    โดยตรง สามารถทำข้อสอบและส่งคำตอบผ่านหน้าต่างด้านบนได้
+
+  </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
+
+<div class="bottom-nav">
+
+  <div class="bottom-inner">
+
+
+    <a
+      class="bottom-btn"
+      href="activity.html"
+    >
+      ← ย้อนกลับ
+    </a>
+
+
+    <div class="bottom-center">
+
+      หน้า 7 / 9
+
+    </div>
+
+
+    <a
+      class="bottom-btn next"
+      href="summary.html"
+    >
+      ถัดไป →
+
+    </a>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+  AI Learning ป.6 ·
+  เว็บไซต์สื่อการเรียนรู้เรื่องปัญญาประดิษฐ์ (AI)
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+const frame =
+  document.getElementById("examFrame");
+
+const loading =
+  document.getElementById("loading");
+
+
+frame.addEventListener(
+  "load",
+  function(){
+
+    loading.classList.add("hide");
+
+  }
+);
+
+
+setTimeout(
+  function(){
+
+    loading.classList.add("hide");
+
+  },
+  8000
+);
+
+</script>
+
+
+</body>
+
+</html>
